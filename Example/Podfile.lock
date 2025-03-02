@@ -1,0 +1,16 @@
+PODS:
+  - ZHHRootNavigationController (0.1.0)
+
+DEPENDENCIES:
+  - ZHHRootNavigationController (from `../`)
+
+EXTERNAL SOURCES:
+  ZHHRootNavigationController:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ZHHRootNavigationController: e4d9a77d11638f54258a5e4412edff218eda00b7
+
+PODFILE CHECKSUM: 8bb459c19bcfc66fbd69100a359fae6d37e40d43
+
+COCOAPODS: 1.16.2

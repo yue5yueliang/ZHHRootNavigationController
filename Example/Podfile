@@ -1,0 +1,17 @@
+use_frameworks!
+
+##忽略.cocoapods中多个specs源引起的警告问题
+install! 'cocoapods', :warn_for_unused_master_specs_repo => false
+
+# Uncomment the next line to define a global platform for your project
+platform :ios, '13.0'
+
+target 'ZHHRootNavigationController_Example' do
+  pod 'ZHHRootNavigationController', :path => '../'
+
+  target 'ZHHRootNavigationController_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
