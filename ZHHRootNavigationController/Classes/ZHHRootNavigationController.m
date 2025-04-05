@@ -60,247 +60,173 @@
 
 @interface ZHHRootNavigationController () <UINavigationControllerDelegate, UIGestureRecognizerDelegate>
 
-/// 导航控制器的委托对象，使用 weak 修饰符避免循环引用
+/// 导航控制器的委托对象，使用 weak 修饰避免循环引用
 @property (nonatomic, weak) id<UINavigationControllerDelegate> zhh_delegate;
 
 /// 动画完成后的回调块
 @property (nonatomic, copy) void(^animationBlock)(BOOL finished);
 
-/**
- *  根据需要为指定的视图控制器安装左侧的 UIBarButtonItem
- *
- *  @param vc 需要安装左侧按钮的视图控制器
- */
+/// 为指定视图控制器安装左侧返回按钮（如有需要）
+/// @param vc 目标视图控制器
 - (void)_installsLeftBarButtonItemIfNeededForViewController:(UIViewController *)vc;
 
 @end
 
 @interface ZHHContainerController ()
 
-/// 内容视图控制器
+/// 当前容器中的内容视图控制器
 @property (nonatomic, strong) __kindof UIViewController *contentViewController;
 
-/// 容器控制器的导航控制器
+/// 容器控制器内部持有的导航控制器
 @property (nonatomic, strong) UINavigationController *containerNavigationController;
 
-/**
- *  使用指定的内容视图控制器创建并返回一个新的 ZHHContainerController 实例
- *
- *  @param controller 需要显示的内容视图控制器
- *
- *  @return 新的 ZHHContainerController 实例
- */
+/// 创建一个包含指定内容控制器的容器控制器
+/// @param controller 要包装的内容控制器
+/// @return 初始化后的容器控制器
 + (instancetype)containerControllerWithController:(UIViewController *)controller;
 
-/**
- *  使用指定的内容视图控制器和自定义的导航栏类创建并返回一个新的 ZHHContainerController 实例
- *
- *  @param controller         需要显示的内容视图控制器
- *  @param navigationBarClass 自定义的导航栏类
- *
- *  @return 新的 ZHHContainerController 实例
- */
-+ (instancetype)containerControllerWithController:(UIViewController *)controller
-                               navigationBarClass:(Class)navigationBarClass;
+/// 创建一个带有自定义导航栏类的容器控制器
+/// @param controller 要包装的内容控制器
+/// @param navigationBarClass 自定义导航栏类
+/// @return 初始化后的容器控制器
++ (instancetype)containerControllerWithController:(UIViewController *)controller navigationBarClass:(Class)navigationBarClass;
 
-/**
- *  使用指定的内容视图控制器、自定义的导航栏类，并指定是否使用占位视图控制器，创建并返回一个新的 ZHHContainerController 实例
- *
- *  @param controller                需要显示的内容视图控制器
- *  @param navigationBarClass        自定义的导航栏类
- *  @param yesOrNo                   是否使用占位视图控制器
- *
- *  @return 新的 ZHHContainerController 实例
- */
-+ (instancetype)containerControllerWithController:(UIViewController *)controller
-                               navigationBarClass:(Class)navigationBarClass
-                        withPlaceholderController:(BOOL)yesOrNo;
+/// 创建一个带有导航栏类和占位控制器选项的容器控制器
+/// @param controller 要包装的内容控制器
+/// @param navigationBarClass 自定义导航栏类
+/// @param yesOrNo 是否使用占位控制器
+/// @return 初始化后的容器控制器
++ (instancetype)containerControllerWithController:(UIViewController *)controller navigationBarClass:(Class)navigationBarClass withPlaceholderController:(BOOL)yesOrNo;
 
-/**
- *  使用指定的内容视图控制器、自定义的导航栏类、是否使用占位视图控制器、以及自定义的返回按钮和标题，创建并返回一个新的 ZHHContainerController 实例
- *
- *  @param controller                需要显示的内容视图控制器
- *  @param navigationBarClass        自定义的导航栏类
- *  @param yesOrNo                   是否使用占位视图控制器
- *  @param backItem                  自定义的返回按钮
- *  @param backTitle                 返回按钮的标题
- *
- *  @return 新的 ZHHContainerController 实例
- */
+/// 创建一个完整配置的容器控制器
+/// @param controller 要包装的内容控制器
+/// @param navigationBarClass 自定义导航栏类
+/// @param yesOrNo 是否使用占位控制器
+/// @param backItem 自定义的返回按钮项
+/// @param backTitle 返回按钮的标题
+/// @return 初始化后的容器控制器
 + (instancetype)containerControllerWithController:(UIViewController *)controller
                                navigationBarClass:(Class)navigationBarClass
                         withPlaceholderController:(BOOL)yesOrNo
                                 backBarButtonItem:(UIBarButtonItem *)backItem
                                         backTitle:(NSString *)backTitle;
 
-/**
- *  使用指定的内容视图控制器初始化并返回一个新的 ZHHContainerController 实例
- *
- *  @param controller 需要显示的内容视图控制器
- *
- *  @return 新的 ZHHContainerController 实例
- */
+/// 使用指定内容控制器初始化容器控制器
+/// @param controller 要包装的内容控制器
+/// @return 初始化后的容器控制器
 - (instancetype)initWithController:(UIViewController *)controller;
 
-/**
- *  使用指定的内容视图控制器和自定义的导航栏类初始化并返回一个新的 ZHHContainerController 实例
- *
- *  @param controller         需要显示的内容视图控制器
- *  @param navigationBarClass 自定义的导航栏类
- *
- *  @return 新的 ZHHContainerController 实例
- */
+
+/// 使用内容控制器和自定义导航栏类初始化容器控制器
+/// @param controller 要包装的内容控制器
+/// @param navigationBarClass 自定义导航栏类
+/// @return 初始化后的容器控制器
 - (instancetype)initWithController:(UIViewController *)controller navigationBarClass:(Class)navigationBarClass;
 
 @end
 
 
-/**
- * 安全地解包视图控制器，如果传入的控制器是 ZHHContainerController 类型，则返回其内容控制器。
- *
- * @param controller 需要解包的视图控制器
- *
- * @return 如果传入的控制器是 ZHHContainerController，则返回其内容控制器；否则返回原视图控制器
- */
+/// 安全解包视图控制器。如果是 ZHHContainerController，则返回其内容控制器；否则返回自身。
+/// @param controller 要解包的视图控制器
+/// @return 解包后的真实视图控制器
 static inline UIViewController *ZHHSafeUnwrapViewController(UIViewController *controller) {
-    // 检查传入的控制器是否为 ZHHContainerController 类型
     if ([controller isKindOfClass:[ZHHContainerController class]]) {
-        // 返回 ZHHContainerController 的内容视图控制器
         return ((ZHHContainerController *)controller).contentViewController;
     }
-    // 如果不是 ZHHContainerController 类型，则直接返回传入的控制器
     return controller;
 }
 
-/**
- * 安全地包裹视图控制器。如果控制器还没有被 ZHHContainerController 包裹，则创建一个新的 ZHHContainerController 来包裹它。
- *
- * @param controller             需要包裹的视图控制器
- * @param navigationBarClass     自定义导航栏的类
- * @param withPlaceholder        是否包含占位控制器的标志 (YES 为需要，NO 为不需要)
- * @param backItem               自定义的返回按钮
- * @param backTitle              返回按钮的标题
- *
- * @return 如果控制器还没有被包裹，则返回一个新的 ZHHContainerController 实例；否则返回原视图控制器
- */
+/// 安全包裹视图控制器。如果尚未被包裹，则使用完整配置创建 ZHHContainerController。
+/// @param controller 要包裹的视图控制器
+/// @param navigationBarClass 自定义导航栏类
+/// @param withPlaceholder 是否使用占位控制器
+/// @param backItem 自定义返回按钮
+/// @param backTitle 返回按钮标题
+/// @return 包裹后的控制器
 __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewController(UIViewController *controller, Class navigationBarClass, BOOL withPlaceholder, UIBarButtonItem *backItem, NSString *backTitle) {
-    // 检查控制器是否为 ZHHContainerController 类型，或其父控制器是否为 ZHHContainerController 类型
     if (![controller isKindOfClass:[ZHHContainerController class]] &&
         ![controller.parentViewController isKindOfClass:[ZHHContainerController class]]) {
-        // 如果未被包裹，则创建一个 ZHHContainerController 来包裹传入的控制器
         return [ZHHContainerController containerControllerWithController:controller
                                                       navigationBarClass:navigationBarClass
                                                withPlaceholderController:withPlaceholder
                                                        backBarButtonItem:backItem
                                                                backTitle:backTitle];
     }
-    // 如果控制器已经被包裹，直接返回原控制器
     return controller;
 }
 
-/**
- * 安全地包裹视图控制器。如果控制器尚未被 ZHHContainerController 包裹，则创建一个新的 ZHHContainerController 来包裹它。
- *
- * @param controller              需要包裹的视图控制器
- * @param navigationBarClass      自定义导航栏的类
- * @param withPlaceholder        是否包含占位控制器的标志 (YES 为需要，NO 为不需要)
- *
- * @return 如果控制器还没有被包裹，则返回一个新的 ZHHContainerController 实例；否则返回原视图控制器
- */
+/// 安全包裹视图控制器。如果尚未被包裹，则使用占位标志创建 ZHHContainerController。
+/// @param controller 要包裹的视图控制器
+/// @param navigationBarClass 自定义导航栏类
+/// @param withPlaceholder 是否使用占位控制器
+/// @return 包裹后的控制器
 __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewController(UIViewController *controller, Class navigationBarClass, BOOL withPlaceholder) {
-    // 检查控制器是否为 ZHHContainerController 类型，或其父控制器是否为 ZHHContainerController 类型
     if (![controller isKindOfClass:[ZHHContainerController class]] &&
         ![controller.parentViewController isKindOfClass:[ZHHContainerController class]]) {
-        // 如果未被包裹，则创建一个 ZHHContainerController 来包裹传入的控制器
         return [ZHHContainerController containerControllerWithController:controller
                                                       navigationBarClass:navigationBarClass
                                                withPlaceholderController:withPlaceholder];
     }
-    // 如果控制器已经被包裹，直接返回原控制器
     return controller;
 }
 
-/**
- * 安全地包裹视图控制器。如果控制器尚未被 ZHHContainerController 包裹，则创建一个新的 ZHHContainerController 来包裹它。
- * 此重载版本使用默认的占位控制器标志 NO。
- *
- * @param controller         需要包裹的视图控制器
- * @param navigationBarClass 自定义导航栏的类
- *
- * @return 如果控制器还没有被包裹，则返回一个新的 ZHHContainerController 实例；否则返回原视图控制器
- */
+/// 安全包裹视图控制器。默认不使用占位控制器。
+/// @param controller 要包裹的视图控制器
+/// @param navigationBarClass 自定义导航栏类
+/// @return 包裹后的控制器
 __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewController(UIViewController *controller, Class navigationBarClass) {
-    // 调用具有 withPlaceholder 参数的重载函数，默认值为 NO
     return ZHHSafeWrapViewController(controller, navigationBarClass, NO);
 }
 
 @implementation ZHHContainerController
-/**
- * 创建一个容器控制器实例，并将指定的视图控制器作为参数传入。
- *
- * @param controller 需要嵌入容器的视图控制器
- *
- * @return 初始化后的容器控制器实例
- */
+
+/// 创建一个容器控制器实例，并将指定的视图控制器嵌入其中。
+///
+/// @param controller 需要嵌入容器的视图控制器
+/// @return 初始化后的 ZHHContainerController 实例
 + (instancetype)containerControllerWithController:(UIViewController *)controller {
-    // 调用初始化方法 initWithController:，传入要包裹的视图控制器
     return [[self alloc] initWithController:controller];
 }
 
-/**
- * 创建一个容器控制器实例，并将指定的视图控制器和自定义导航栏类作为参数传入。
- *
- * @param controller         需要嵌入容器的视图控制器
- * @param navigationBarClass 自定义导航栏的类
- *
- * @return 初始化后的容器控制器实例
- */
+/// 创建一个容器控制器实例，并将指定的视图控制器与自定义导航栏类嵌入其中。
+///
+/// @param controller         需要嵌入容器的视图控制器
+/// @param navigationBarClass 自定义的导航栏类
+/// @return 初始化后的 ZHHContainerController 实例
 + (instancetype)containerControllerWithController:(UIViewController *)controller navigationBarClass:(Class)navigationBarClass {
-    // 调用 initWithController:navigationBarClass: 初始化方法，传入要包裹的视图控制器和自定义的导航栏类
     return [[self alloc] initWithController:controller navigationBarClass:navigationBarClass];
 }
 
-/**
- * 创建一个容器控制器实例，并将指定的视图控制器、自定义导航栏类和是否包含占位控制器的标志作为参数传入。
- *
- * @param controller              需要嵌入容器的视图控制器
- * @param navigationBarClass      自定义导航栏的类
- * @param yesOrNo                 是否包含占位控制器的标志 (YES 为需要，NO 为不需要)
- *
- * @return 初始化后的容器控制器实例
- */
+/// 创建一个容器控制器实例，并传入视图控制器、自定义导航栏类和占位控制器标志。
+///
+/// @param controller         需要嵌入容器的视图控制器
+/// @param navigationBarClass 自定义导航栏的类
+/// @param yesOrNo            是否包含占位控制器（YES 表示需要，NO 表示不需要）
+/// @return 初始化后的 ZHHContainerController 实例
 + (instancetype)containerControllerWithController:(UIViewController *)controller navigationBarClass:(Class)navigationBarClass withPlaceholderController:(BOOL)yesOrNo {
-    // 调用 initWithController:navigationBarClass:withPlaceholderController: 初始化方法，传入视图控制器、导航栏类和占位控制器标志
     return [[self alloc] initWithController:controller navigationBarClass:navigationBarClass withPlaceholderController:yesOrNo];
 }
 
-/**
- * 创建并返回一个容器控制器的实例，容器控制器中包含指定的子控制器、自定义导航栏、返回按钮和标题。
- *
- * @param controller            需要嵌入容器的视图控制器
- * @param navigationBarClass    自定义导航栏的类
- * @param yesOrNo               是否需要占位控制器 (YES 为需要，NO 为不需要)
- * @param backItem              自定义返回按钮的 UIBarButtonItem
- * @param backTitle             返回按钮的标题
- *
- * @return 生成的容器控制器实例
- */
+/// 创建一个容器控制器实例，传入视图控制器、自定义导航栏、占位控制器标志、自定义返回按钮和标题。
+///
+/// @param controller         需要嵌入容器的视图控制器
+/// @param navigationBarClass 自定义导航栏的类
+/// @param yesOrNo            是否包含占位控制器（YES 表示需要，NO 表示不需要）
+/// @param backItem           自定义返回按钮的 UIBarButtonItem
+/// @param backTitle          返回按钮的标题
+/// @return 初始化后的 ZHHContainerController 实例
 + (instancetype)containerControllerWithController:(UIViewController *)controller navigationBarClass:(Class)navigationBarClass withPlaceholderController:(BOOL)yesOrNo backBarButtonItem:(UIBarButtonItem *)backItem backTitle:(NSString *)backTitle {
-    // 使用 self 进行实例化，调用自定义的初始化方法并传入相关参数
     return [[self alloc] initWithController:controller navigationBarClass:navigationBarClass withPlaceholderController:yesOrNo backBarButtonItem:backItem backTitle:backTitle];
 }
 
-/**
- * 初始化一个容器控制器，并嵌入指定的子控制器和自定义导航栏。
- *
- * @param controller            需要嵌入容器的视图控制器
- * @param navigationBarClass    自定义导航栏的类
- * @param yesOrNo               是否需要占位控制器 (YES 为需要，NO 为不需要)
- * @param backItem              自定义返回按钮的 UIBarButtonItem
- * @param backTitle             返回按钮的标题
- *
- * @return 初始化后的容器控制器实例
- */
+/// 初始化一个容器控制器，嵌入指定的视图控制器、自定义导航栏、占位控制器、返回按钮及标题。
+///
+/// @param controller         需要嵌入的视图控制器
+/// @param navigationBarClass 自定义导航栏的类
+/// @param yesOrNo            是否包含占位控制器（YES 表示需要，NO 表示不需要）
+/// @param backItem           自定义返回按钮的 UIBarButtonItem
+/// @param backTitle          返回按钮的标题
+/// @return 初始化后的 ZHHContainerController 实例
 - (instancetype)initWithController:(UIViewController *)controller navigationBarClass:(Class)navigationBarClass withPlaceholderController:(BOOL)yesOrNo backBarButtonItem:(UIBarButtonItem *)backItem backTitle:(NSString *)backTitle {
     self = [super init];
     if (self) {
@@ -337,52 +263,37 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
     return self;
 }
 
-/**
- * 使用指定的视图控制器、自定义导航栏类和占位控制器标志初始化容器控制器。
- *
- * @param controller            需要嵌入容器的视图控制器
- * @param navigationBarClass    自定义导航栏的类
- * @param yesOrNo               是否需要占位控制器 (YES 为需要，NO 为不需要)
- *
- * @return 初始化后的容器控制器实例
- */
+/// 使用指定视图控制器、自定义导航栏类和占位控制器标志初始化容器控制器。
+///
+/// @param controller         需要嵌入的视图控制器
+/// @param navigationBarClass 自定义导航栏的类
+/// @param yesOrNo            是否包含占位控制器（YES 表示需要，NO 表示不需要）
+/// @return 初始化后的 ZHHContainerController 实例
 - (instancetype)initWithController:(UIViewController *)controller navigationBarClass:(Class)navigationBarClass withPlaceholderController:(BOOL)yesOrNo {
-    // 调用带有所有参数的初始化方法
     return [self initWithController:controller navigationBarClass:navigationBarClass withPlaceholderController:yesOrNo backBarButtonItem:nil backTitle:nil];
 }
 
-/**
- * 使用指定的视图控制器和自定义导航栏类初始化容器控制器，默认不使用占位控制器。
- *
- * @param controller            需要嵌入容器的视图控制器
- * @param navigationBarClass    自定义导航栏的类
- *
- * @return 初始化后的容器控制器实例
- */
+/// 使用指定视图控制器和自定义导航栏类初始化容器控制器，默认不包含占位控制器。
+///
+/// @param controller         需要嵌入的视图控制器
+/// @param navigationBarClass 自定义导航栏的类
+/// @return 初始化后的 ZHHContainerController 实例
 - (instancetype)initWithController:(UIViewController *)controller navigationBarClass:(Class)navigationBarClass {
-    // 调用带有占位控制器参数的初始化方法，默认不使用返回按钮和标题
     return [self initWithController:controller navigationBarClass:navigationBarClass withPlaceholderController:NO];
 }
 
-/**
- * 使用指定的视图控制器初始化容器控制器，默认不使用自定义导航栏和占位控制器。
- *
- * @param controller            需要嵌入容器的视图控制器
- *
- * @return 初始化后的容器控制器实例
- */
+/// 使用指定视图控制器初始化容器控制器，默认不使用自定义导航栏和占位控制器。
+///
+/// @param controller 需要嵌入的视图控制器
+/// @return 初始化后的 ZHHContainerController 实例
 - (instancetype)initWithController:(UIViewController *)controller {
-    // 调用不使用自定义导航栏的初始化方法
     return [self initWithController:controller navigationBarClass:nil];
 }
 
-/**
- * 使用指定的内容视图控制器初始化容器控制器，默认不设置导航栏和占位控制器。
- *
- * @param controller            内容视图控制器
- *
- * @return 初始化后的容器控制器实例
- */
+/// 使用指定的内容控制器初始化容器控制器，默认不包含导航栏和占位控制器。
+///
+/// @param controller 内容视图控制器
+/// @return 初始化后的 ZHHContainerController 实例
 - (instancetype)initWithContentController:(UIViewController *)controller {
     self = [super init];
     if (self) {
@@ -396,13 +307,9 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
     return self;
 }
 
-/**
- * 返回对象的调试描述字符串，用于调试和日志记录。
- *
- * @return 包含对象类名、内存地址和内容视图控制器的调试信息字符串
- */
+/// 返回调试描述信息，包含类名、内存地址和内容控制器信息。
+/// @return 调试信息字符串
 - (NSString *)debugDescription {
-    // 格式化并返回包含对象类名、内存地址和内容视图控制器的调试信息字符串
     return [NSString stringWithFormat:@"格式化并返回包含对象<%@: %p contentViewController: %@>", self.class, self, self.contentViewController];
 }
 
@@ -411,228 +318,150 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
     
     // 如果容器导航控制器存在
     if (self.containerNavigationController) {
-        // 设置容器导航控制器的视图自动调整大小
-        self.containerNavigationController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-        // 将容器导航控制器的视图添加到当前视图控制器的视图中
-        [self.view addSubview:self.containerNavigationController.view];
         
-        // 确保容器视图的框架与当前视图控制器的视图边界一致
+        self.containerNavigationController.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+        [self.view addSubview:self.containerNavigationController.view];
         self.containerNavigationController.view.frame = self.view.bounds;
     } else {// 如果容器导航控制器不存在
-        // 设置内容视图控制器的视图自动调整大小
+
         self.contentViewController.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        // 设置内容视图控制器的视图框架为当前视图控制器的视图边界
         self.contentViewController.view.frame = self.view.bounds;
-        // 将内容视图控制器的视图添加到当前视图控制器的视图中
         [self.view addSubview:self.contentViewController.view];
     }
 }
 
-- (void)viewDidLayoutSubviews {
-    [super viewDidLayoutSubviews];
-    
-    // 如果存在容器导航控制器，确保其视图的框架与当前视图控制器的视图边界一致
-    if (self.containerNavigationController) {
-        // 修复 issue #16，移除原本的代码行，确保容器视图的框架自动适应视图的布局变化
-        // self.containerNavigationController.view.frame = self.view.bounds;
-    }
-}
-
-/**
- * 将 `contentViewController` 设置为第一个响应者。
- *
- * @return 如果 `contentViewController` 成功成为第一个响应者，则返回 YES；否则返回 NO。
- */
+/// 尝试让 `contentViewController` 成为第一响应者。
+/// @return 如果成功则返回 YES，否则返回 NO。
 - (BOOL)becomeFirstResponder {
     return [self.contentViewController becomeFirstResponder];
 }
 
-/**
- * 检查 `contentViewController` 是否可以成为第一个响应者。
- *
- * @return 如果 `contentViewController` 可以成为第一个响应者，则返回 YES；否则返回 NO。
- */
+/// 尝试让 `contentViewController` 成为第一响应者。
+/// @return 如果成功则返回 YES，否则返回 NO。
 - (BOOL)canBecomeFirstResponder {
     return [self.contentViewController canBecomeFirstResponder];
 }
 
-/**
- * 返回 `contentViewController` 所需的状态栏样式。
- *
- * @return `contentViewController` 的状态栏样式。
- */
+/// 返回 `contentViewController` 所需的状态栏样式。
+/// @return `contentViewController` 的状态栏样式。
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return [self.contentViewController preferredStatusBarStyle];
 }
 
-/**
- * 返回 `contentViewController` 是否希望隐藏状态栏。
- *
- * @return 如果 `contentViewController` 希望隐藏状态栏，则返回 YES；否则返回 NO。
- */
+/// 返回 `contentViewController` 是否希望隐藏状态栏。
+/// @return 如果 `contentViewController` 希望隐藏状态栏，则返回 YES；否则返回 NO。
 - (BOOL)prefersStatusBarHidden {
     return [self.contentViewController prefersStatusBarHidden];
 }
 
-/**
- * 返回 `contentViewController` 所需的状态栏更新动画。
- *
- * @return `contentViewController` 的状态栏更新动画类型。
- */
+/// 返回 `contentViewController` 所需的状态栏更新动画。
+/// @return `contentViewController` 的状态栏更新动画类型。
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
     return [self.contentViewController preferredStatusBarUpdateAnimation];
 }
 
-/**
- * 返回用于推迟系统手势的子视图控制器。如果当前视图控制器不支持该功能，返回 nil。
- *
- * @return `contentViewController`，用于处理屏幕边缘推迟系统手势的子视图控制器。
- */
-- (nullable UIViewController *)childViewControllerForScreenEdgesDeferringSystemGestures {
+/// 返回用于推迟系统手势的子视图控制器。如果当前视图控制器不支持该功能，返回 nil。
+/// @return `contentViewController`，用于处理屏幕边缘推迟系统手势的子视图控制器。
+- (UIViewController * _Nullable)childViewControllerForScreenEdgesDeferringSystemGestures {
     return self.contentViewController;
 }
 
-/**
- * 返回需要推迟系统手势的屏幕边缘。
- *
- * @return `contentViewController` 所需的屏幕边缘。
- */
+/// 返回需要推迟系统手势的屏幕边缘。
+/// @return `contentViewController` 所需的屏幕边缘。
 - (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
     return [self.contentViewController preferredScreenEdgesDeferringSystemGestures];
 }
 
-/**
- * 返回是否希望隐藏主页指示符。
- *
- * @return 如果 `contentViewController` 希望隐藏主页指示符，则返回 YES；否则返回 NO。
- */
+/// 返回是否希望隐藏主页指示符。
+/// @return 如果 `contentViewController` 希望隐藏主页指示符，则返回 YES；否则返回 NO。
 - (BOOL)prefersHomeIndicatorAutoHidden {
     return [self.contentViewController prefersHomeIndicatorAutoHidden];
 }
 
-/**
- * 返回用于自动隐藏主页指示符的子视图控制器。如果当前视图控制器不支持该功能，返回 nil。
- *
- * @return `contentViewController`，用于处理主页指示符自动隐藏的子视图控制器。
- */
+/// 返回用于自动隐藏主页指示符的子视图控制器。如果当前视图控制器不支持该功能，返回 nil。
+/// @return `contentViewController`，用于处理主页指示符自动隐藏的子视图控制器。
 - (UIViewController *)childViewControllerForHomeIndicatorAutoHidden {
     return self.contentViewController;
 }
 
-/**
- * 返回 `contentViewController` 是否支持自动旋转。
- *
- * @return 如果 `contentViewController` 支持自动旋转，则返回 YES；否则返回 NO。
- */
+/// 返回 `contentViewController` 是否支持自动旋转。
+/// @return 如果 `contentViewController` 支持自动旋转，则返回 YES；否则返回 NO。
 - (BOOL)shouldAutorotate {
     return self.contentViewController.shouldAutorotate;
 }
 
-/**
- * 返回 `contentViewController` 支持的界面方向。
- *
- * @return `contentViewController` 支持的界面方向掩码（`UIInterfaceOrientationMask`）。
- */
+/// 返回 `contentViewController` 支持的界面方向。
+/// @return `contentViewController` 支持的界面方向掩码（`UIInterfaceOrientationMask`）。
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return self.contentViewController.supportedInterfaceOrientations;
 }
 
-/**
- * 返回 `contentViewController` 的首选界面方向。
- *
- * @return `contentViewController` 的首选界面方向（`UIInterfaceOrientation`）。
- */
+/// 返回 `contentViewController` 的首选界面方向。
+/// @return `contentViewController` 的首选界面方向（`UIInterfaceOrientation`）。
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     return self.contentViewController.preferredInterfaceOrientationForPresentation;
 }
 
-/**
- * 返回 `contentViewController` 是否在推送时隐藏底部标签栏。
- *
- * @return 如果 `contentViewController` 在推送时隐藏底部标签栏，则返回 YES；否则返回 NO。
- */
+/// 返回 `contentViewController` 是否在推送时隐藏底部标签栏。
+/// @return 如果 `contentViewController` 在推送时隐藏底部标签栏，则返回 YES；否则返回 NO。
 - (BOOL)hidesBottomBarWhenPushed {
     return self.contentViewController.hidesBottomBarWhenPushed;
 }
 
-/**
- * 返回 `contentViewController` 的标题。
- *
- * @return `contentViewController` 的标题字符串。
- */
+/// 返回 `contentViewController` 的标题。
+/// @return `contentViewController` 的标题字符串。
 - (NSString *)title {
     return self.contentViewController.title;
 }
 
-/**
- * 返回 `contentViewController` 的 tabBarItem。
- *
- * @return `contentViewController` 的 `UITabBarItem` 对象。
- */
+/// 返回 `contentViewController` 的 tabBarItem。
+/// @return `contentViewController` 的 `UITabBarItem` 对象。
 - (UITabBarItem *)tabBarItem {
     return self.contentViewController.tabBarItem;
 }
 
-/**
- * 返回 `contentViewController` 的自定义动画过渡对象。
- *
- * @return `contentViewController` 的 `zhh_animatedTransitioning` 对象，遵循 `UIViewControllerAnimatedTransitioning` 协议。
- */
+/// 返回 `contentViewController` 的自定义动画过渡对象。
+/// @return `contentViewController` 的 `zhh_animatedTransitioning` 对象，遵循 `UIViewControllerAnimatedTransitioning` 协议。
 - (id<UIViewControllerAnimatedTransitioning>)zhh_animatedTransitioning {
     return self.contentViewController.zhh_animatedTransitioning;
 }
 
-/**
- * 返回 `contentViewController` 的下一个兄弟视图控制器。
- *
- * @return `contentViewController` 的下一个兄弟视图控制器。如果没有下一个兄弟视图控制器，则返回 nil。
- */
-- (nullable __kindof UIViewController *)zhh_nextSiblingController {
-    return self.contentViewController.zhh_nextSiblingController;
+/// 返回 `contentViewController` 的下一个兄弟视图控制器。
+/// @return `contentViewController` 的下一个兄弟视图控制器。如果没有下一个兄弟视图控制器，则返回 nil。
+- (__kindof UIViewController * _Nullable)zhh_nextPushViewController {
+    return self.contentViewController.zhh_nextPushViewController;
 }
 
 @end
 
 @interface UIViewController (ZHHContainerNavigationController)
 
-/**
- * 是否已经设置了交互式 Pop 的标志位。
- */
+/// 是否已经设置了交互式 Pop 的标志位。
 @property (nonatomic, assign, readonly) BOOL zhh_hasSetInteractivePop;
 
 @end
 
 @implementation UIViewController (ZHHContainerNavigationController)
 
-/**
- * 判断当前视图控制器是否已经设置了交互式 Pop 的属性。
- *
- * @return 如果已经设置了 `zhh_disableInteractivePop`，则返回 YES；否则返回 NO。
- */
+/// 判断当前视图控制器是否已经设置了交互式 Pop 的属性。
+/// @return 如果已经设置了 `zhh_disableEdgePopGesture`，则返回 YES；否则返回 NO。
 - (BOOL)zhh_hasSetInteractivePop {
-    // 使用关联对象来获取 `zhh_disableInteractivePop` 属性的状态
-    return !!objc_getAssociatedObject(self, @selector(zhh_disableInteractivePop));
+    // 使用关联对象来获取 `zhh_disableEdgePopGesture` 属性的状态
+    return !!objc_getAssociatedObject(self, @selector(zhh_disableEdgePopGesture));
 }
 
 @end
 
 @implementation ZHHContainerNavigationController
-/**
- * 使用给定的根视图控制器初始化一个自定义导航控制器。
- *
- * @param rootViewController 要作为根视图控制器的 `UIViewController` 实例。
- *
- * @return 初始化后的自定义导航控制器实例。
- */
+
+/// 使用给定的根视图控制器初始化一个自定义导航控制器。
+/// @param rootViewController 要作为根视图控制器的 `UIViewController` 实例。
+/// @return 初始化后的自定义导航控制器实例。
 - (instancetype)initWithRootViewController:(UIViewController *)rootViewController {
-    // 调用父类初始化方法，使用 rootViewController 提供的自定义导航栏类，并不使用工具栏类
     self = [super initWithNavigationBarClass:rootViewController.zhh_navigationBarClass toolbarClass:nil];
     if (self) {
         // 使用 pushViewController:animated: 方法将 rootViewController 推入导航堆栈
         [self pushViewController:rootViewController animated:NO];
-        
-        // 直接设置 viewControllers 会导致 Bug，因此避免这种做法
-        // self.viewControllers = @[rootViewController];
     }
     return self;
 }
@@ -701,10 +530,10 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         
         // 如果导航栏隐藏或者有左侧按钮，禁用侧滑返回手势
         if (self.navigationBarHidden || hasSetLeftItem) {
-            viewController.zhh_disableInteractivePop = YES;
+            viewController.zhh_disableEdgePopGesture = YES;
         } else {
             // 否则允许侧滑返回
-            viewController.zhh_disableInteractivePop = NO;
+            viewController.zhh_disableEdgePopGesture = NO;
         }
     }
     
@@ -743,7 +572,6 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
             return self.zhh_navigationController.zhh_viewControllers;
         }
     }
-    // 否则，调用父类方法返回默认的 viewControllers
     return [super viewControllers];
 }
 
@@ -752,98 +580,91 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
     if (self.navigationController) {
         return [self.navigationController allowedChildViewControllersForUnwindingFromSource:source];
     }
-    // 否则，调用父类方法处理
     return [super allowedChildViewControllersForUnwindingFromSource:source];
 }
 
-// 推送一个视图控制器到导航堆栈
+/// 推送一个视图控制器到导航堆栈
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     // 如果当前有导航控制器，调用导航控制器的push方法
     if (self.navigationController) {
         [self.navigationController pushViewController:viewController animated:animated];
     } else {
-        // 否则，调用父类的push方法
         [super pushViewController:viewController animated:animated];
     }
 }
 
-// 从导航堆栈中弹出当前视图控制器
+/// 从导航堆栈中弹出当前视图控制器
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated {
     // 如果当前有导航控制器，调用导航控制器的pop方法
     if (self.navigationController) {
         return [self.navigationController popViewControllerAnimated:animated];
     }
-    // 否则，调用父类的pop方法
     return [super popViewControllerAnimated:animated];
 }
 
-// 弹出到根视图控制器
+/// 弹出到根视图控制器
 - (NSArray<__kindof UIViewController *> *)popToRootViewControllerAnimated:(BOOL)animated {
     // 如果有导航控制器，调用导航控制器的popToRoot方法
     if (self.navigationController) {
         return [self.navigationController popToRootViewControllerAnimated:animated];
     }
-    // 否则，调用父类的方法
     return [super popToRootViewControllerAnimated:animated];
 }
 
-// 弹出到指定的视图控制器
+/// 弹出到指定的视图控制器
 - (NSArray<__kindof UIViewController *> *)popToViewController:(UIViewController *)viewController animated:(BOOL)animated {
     // 如果有导航控制器，调用导航控制器的popToViewController方法
     if (self.navigationController) {
         return [self.navigationController popToViewController:viewController animated:animated];
     }
-    // 否则，调用父类的方法
     return [super popToViewController:viewController animated:animated];
 }
 
-// 设置导航控制器的视图控制器数组
+/// 设置导航控制器的视图控制器数组
 - (void)setViewControllers:(NSArray<UIViewController *> *)viewControllers animated:(BOOL)animated {
     // 如果有导航控制器，调用导航控制器的setViewControllers方法
     if (self.navigationController) {
         [self.navigationController setViewControllers:viewControllers animated:animated];
     } else {
-        // 否则，调用父类的方法
         [super setViewControllers:viewControllers animated:animated];
     }
 }
 
-// 设置导航控制器的代理
+/// 设置导航控制器的代理
 - (void)setDelegate:(id<UINavigationControllerDelegate>)delegate {
     // 如果有导航控制器，设置导航控制器的代理
     if (self.navigationController) {
         self.navigationController.delegate = delegate;
     } else {
-        // 否则，调用父类的方法
         [super setDelegate:delegate];
     }
 }
 
-// 设置导航栏是否隐藏
+/// 设置导航栏是否隐藏
 - (void)setNavigationBarHidden:(BOOL)hidden animated:(BOOL)animated {
     [super setNavigationBarHidden:hidden animated:animated];
     // 根据导航栏是否隐藏来设置交互式返回手势
     if (!self.visibleViewController.zhh_hasSetInteractivePop) {
-        self.visibleViewController.zhh_disableInteractivePop = hidden;
+        self.visibleViewController.zhh_disableEdgePopGesture = hidden;
     }
 }
 
-// 返回顶部视图控制器的状态栏样式
+/// 返回顶部视图控制器的状态栏样式
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return [self.topViewController preferredStatusBarStyle];
 }
 
-// 返回顶部视图控制器是否隐藏状态栏
+/// 返回顶部视图控制器是否隐藏状态栏
 - (BOOL)prefersStatusBarHidden {
     return [self.topViewController prefersStatusBarHidden];
 }
 
-// 返回状态栏更新动画类型
+/// 返回状态栏更新动画类型
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
     return [self.topViewController preferredStatusBarUpdateAnimation];
 }
 
-// 如果选择器在导航控制器上有实现，则将其转发给导航控制器
+/// 如果选择器在导航控制器上有实现，则将其转发给导航控制器
 - (id)forwardingTargetForSelector:(SEL)aSelector {
     if ([self.navigationController respondsToSelector:aSelector]) {
         return self.navigationController;
@@ -851,25 +672,25 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
     return nil;
 }
 
-// 返回用于屏幕边缘系统手势延迟的子视图控制器
+/// 返回用于屏幕边缘系统手势延迟的子视图控制器
 - (nullable UIViewController *)childViewControllerForScreenEdgesDeferringSystemGestures {
     // 返回当前顶层视图控制器
     return self.topViewController;
 }
 
-// 返回首选的屏幕边缘系统手势延迟边缘
+/// 返回首选的屏幕边缘系统手势延迟边缘
 - (UIRectEdge)preferredScreenEdgesDeferringSystemGestures {
     // 调用顶层视图控制器的方法，获取其首选的屏幕边缘延迟设置
     return [self.topViewController preferredScreenEdgesDeferringSystemGestures];
 }
 
-// 返回是否首选隐藏主页指示器
+/// 返回是否首选隐藏主页指示器
 - (BOOL)prefersHomeIndicatorAutoHidden {
     // 调用顶层视图控制器的方法，获取是否首选隐藏主页指示器
     return [self.topViewController prefersHomeIndicatorAutoHidden];
 }
 
-// 返回用于主页指示器自动隐藏的子视图控制器
+/// 返回用于主页指示器自动隐藏的子视图控制器
 - (UIViewController *)childViewControllerForHomeIndicatorAutoHidden {
     // 返回当前顶层视图控制器
     return self.topViewController;
@@ -877,18 +698,19 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 @end
 
 @implementation ZHHRootNavigationController
+
 #pragma mark - 方法
-// 返回到上一个视图控制器
+/// 返回到上一个视图控制器
 - (void)onBack:(id)sender {
     [self popViewControllerAnimated:YES];
 }
 
-// 公共初始化方法
+/// 公共初始化方法
 - (void)_commonInit {
     // 在这里添加公共初始化代码
 }
 
-// 如果需要，为视图控制器安装左侧导航栏按钮
+/// 如果需要，为视图控制器安装左侧导航栏按钮
 - (void)_installsLeftBarButtonItemIfNeededForViewController:(UIViewController *)viewController {
     // 判断当前视图控制器是否是根视图控制器
     BOOL isRootVC = viewController == ZHHSafeUnwrapViewController(self.viewControllers.firstObject);
@@ -898,12 +720,12 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
     
     // 如果不是根视图控制器，且不使用系统默认的返回按钮，且没有设置左侧按钮
     if (!isRootVC && !self.useSystemBackBarButtonItem && !hasSetLeftItem) {
-        // 如果视图控制器实现了 zhh_customBackItemWithTarget:action: 方法
-        if ([viewController respondsToSelector:@selector(zhh_customBackItemWithTarget:action:)]) {
-            viewController.navigationItem.leftBarButtonItem = [viewController zhh_customBackItemWithTarget:self action:@selector(onBack:)];
+        // 如果视图控制器实现了 zhh_customBackBarButtonItemWithTarget:action: 方法
+        if ([viewController respondsToSelector:@selector(zhh_customBackBarButtonItemWithTarget:action:)]) {
+            viewController.navigationItem.leftBarButtonItem = [viewController zhh_customBackBarButtonItemWithTarget:self action:@selector(onBack:)];
         } else {
             // 如果以上方法都没有实现，使用默认的返回按钮
-            viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil)
+            viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"返回", nil)
                                                                                                style:UIBarButtonItemStylePlain
                                                                                               target:self
                                                                                               action:@selector(onBack:)];
@@ -915,7 +737,6 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 // 从 Nib 文件加载时调用
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // 设置视图控制器数组，使用父类的视图控制器数组
     self.viewControllers = [super viewControllers];
 }
 
@@ -923,7 +744,6 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        // 调用公共初始化方法
         [self _commonInit];
     }
     return self;
@@ -934,7 +754,6 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 - (instancetype)initWithNavigationBarClass:(Class)navigationBarClass toolbarClass:(Class)toolbarClass {
     self = [super initWithNavigationBarClass:navigationBarClass toolbarClass:toolbarClass];
     if (self) {
-        // 调用公共初始化方法
         [self _commonInit];
     }
     return self;
@@ -945,7 +764,6 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
     // 使用包装的视图控制器初始化父类
     self = [super initWithRootViewController:ZHHSafeWrapViewController(rootViewController, rootViewController.zhh_navigationBarClass)];
     if (self) {
-        // 调用公共初始化方法
         [self _commonInit];
     }
     return self;
@@ -953,11 +771,8 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 
 // 使用根视图控制器进行初始化，不进行视图控制器包装
 - (instancetype)initWithRootViewControllerNoWrapping:(UIViewController *)rootViewController {
-    // 使用不进行包装的视图控制器初始化父类
     self = [super initWithRootViewController:[[ZHHContainerController alloc] initWithContentController:rootViewController]];
     if (self) {
-        // 此处不需要将根视图控制器推入堆栈
-        // [super pushViewController:rootViewController animated:NO];
         // 调用公共初始化方法
         [self _commonInit];
     }
@@ -970,22 +785,7 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // 判断是否为暗黑模式
-    if (@available(iOS 13.0, *)) {
-        // 获取当前的界面风格
-        UIUserInterfaceStyle userInterfaceStyle = self.traitCollection.userInterfaceStyle;
-        
-        // 根据界面风格设置视图背景颜色
-        if (userInterfaceStyle == UIUserInterfaceStyleDark) {
-            self.view.backgroundColor = [UIColor blackColor]; // 暗黑模式下的背景色
-        } else {
-            self.view.backgroundColor = [UIColor whiteColor]; // 光亮模式下的背景色
-        }
-    } else {
-        // iOS 13 之前的系统默认为光亮模式
-        self.view.backgroundColor = [UIColor whiteColor];
-    }
-    
+    self.view.backgroundColor = UIColor.systemBackgroundColor;
     // 设置当前导航控制器的代理为自身
     [super setDelegate:self];
     
@@ -1024,7 +824,6 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
                                                             currentLast.navigationItem.title ?: currentLast.title)
                          animated:animated];
     } else {
-        // 如果当前导航栈为空，则直接推送新视图控制器
         [super pushViewController:ZHHSafeWrapViewController(viewController, viewController.zhh_navigationBarClass) animated:animated];
     }
 }
@@ -1101,7 +900,6 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
     if ([super respondsToSelector:aSelector]) {
         return YES;
     }
-    // 否则，检查代理对象是否实现了该方法
     return [self.zhh_delegate respondsToSelector:aSelector];
 }
 
@@ -1165,10 +963,7 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         self.animationBlock(NO);
     }
     
-    // 将新的动画块保存到实例变量中，以便在动画完成后执行
     self.animationBlock = block;
-    
-    // 调用父类的 pushViewController:animated: 方法来推送视图控制器
     [self pushViewController:viewController animated:animated];
 }
 
@@ -1178,23 +973,18 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         self.animationBlock(NO);
     }
     
-    // 将新的动画块保存到实例变量中，以便在动画完成后执行
     self.animationBlock = block;
     
-    // 调用父类的 popViewControllerAnimated: 方法来弹出视图控制器
     UIViewController *vc = [self popViewControllerAnimated:animated];
     
     // 如果弹出的视图控制器为空，说明弹出操作完成（因为弹出操作成功是不会返回 nil 的）
     if (!vc) {
-        // 执行动画完成的块，并传递 YES 表示动画已经完成
         if (self.animationBlock) {
             self.animationBlock(YES);
-            // 清空动画块，以便后续不再调用
             self.animationBlock = nil;
         }
     }
     
-    // 返回弹出的视图控制器
     return vc;
 }
 
@@ -1204,23 +994,17 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         self.animationBlock(NO);
     }
     
-    // 将新的动画块保存到实例变量中，以便在动画完成后执行
     self.animationBlock = block;
     
     // 调用父类的 popToViewController:animated: 方法来弹出到指定的视图控制器
     NSArray <__kindof UIViewController *> *array = [self popToViewController:viewController animated:animated];
     
-    // 如果返回的数组为空，说明视图控制器弹出操作完成（因为没有找到指定的视图控制器或没有弹出操作）
     if (!array.count) {
-        // 执行动画完成的块，并传递 YES 表示动画已经完成
         if (self.animationBlock) {
             self.animationBlock(YES);
-            // 清空动画块，以便后续不再调用
             self.animationBlock = nil;
         }
     }
-    
-    // 返回弹出的视图控制器数组
     return array;
 }
 
@@ -1230,23 +1014,17 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         self.animationBlock(NO);
     }
     
-    // 将新的动画块保存到实例变量中，以便在动画完成后执行
     self.animationBlock = block;
     
     // 调用父类的 popToRootViewControllerAnimated: 方法来弹出所有视图控制器到根视图控制器
     NSArray <__kindof UIViewController *> *array = [self popToRootViewControllerAnimated:animated];
     
-    // 如果返回的数组为空，说明视图控制器弹出操作完成（因为没有视图控制器需要弹出）
     if (!array.count) {
-        // 执行动画完成的块，并传递 YES 表示动画已经完成
         if (self.animationBlock) {
             self.animationBlock(YES);
-            // 清空动画块，以便后续不再调用
             self.animationBlock = nil;
         }
     }
-    
-    // 返回弹出的视图控制器数组
     return array;
 }
 
@@ -1268,19 +1046,14 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         
         // 如果左侧导航栏按钮已设置且未设置互动弹出属性
         if (hasSetLeftItem && !viewController.zhh_hasSetInteractivePop) {
-            viewController.zhh_disableInteractivePop = YES; // 禁用互动弹出
+            viewController.zhh_disableEdgePopGesture = YES; // 禁用互动弹出
         } else if (!viewController.zhh_hasSetInteractivePop) {
             // 如果左侧导航栏按钮未设置且未设置互动弹出属性
-            viewController.zhh_disableInteractivePop = NO; // 允许互动弹出
+            viewController.zhh_disableEdgePopGesture = NO; // 允许互动弹出
         }
-        
-        // 延迟到 didShow 里执行
-        // [self _installsLeftBarButtonItemIfNeededForViewController:viewController];
     }
     
-    // 如果代理实现了 `navigationController:willShowViewController:animated:` 方法
     if ([self.zhh_delegate respondsToSelector:@selector(navigationController:willShowViewController:animated:)]) {
-        // 调用代理的方法
         [self.zhh_delegate navigationController:navigationController willShowViewController:viewController animated:animated];
     }
 }
@@ -1298,13 +1071,12 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         [self _installsLeftBarButtonItemIfNeededForViewController:viewController];
     }
     
-    // 如果动画为 NO，手动触发 viewDidLoad
     if (!animated) {
         [viewController view];
     }
     
     // 根据视图控制器的互动弹出属性设置互动弹出手势
-    if (viewController.zhh_disableInteractivePop) {
+    if (viewController.zhh_disableEdgePopGesture) {
         // 禁用互动弹出手势
         self.interactivePopGestureRecognizer.delegate = nil;
         self.interactivePopGestureRecognizer.enabled = NO;
@@ -1317,13 +1089,10 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
     // 尝试根据设备方向旋转视图控制器
     [ZHHRootNavigationController attemptRotationToDeviceOrientation];
     
-    // 如果代理实现了 `navigationController:didShowViewController:animated:` 方法
     if ([self.zhh_delegate respondsToSelector:@selector(navigationController:didShowViewController:animated:)]) {
-        // 调用代理的方法
         [self.zhh_delegate navigationController:navigationController didShowViewController:viewController animated:animated];
     }
     
-    // 处理动画完成后的回调
     if (self.animationBlock) {
         if (animated) {
             // 如果有动画，异步回调动画完成
@@ -1343,76 +1112,52 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 
 #pragma mark - UINavigationControllerDelegate Methods
 
-/**
- * 返回支持的界面方向掩码。
- *
- * @param navigationController 当前的导航控制器。
- * @return 支持的界面方向掩码，默认返回 UIInterfaceOrientationMaskAll。
- */
+/// 返回支持的界面方向掩码。
+/// @param navigationController 当前的导航控制器。
+/// @return 支持的界面方向掩码，默认返回 UIInterfaceOrientationMaskAll。
 - (UIInterfaceOrientationMask)navigationControllerSupportedInterfaceOrientations:(UINavigationController *)navigationController {
-    // 如果代理实现了 `navigationControllerSupportedInterfaceOrientations:` 方法
     if ([self.zhh_delegate respondsToSelector:@selector(navigationControllerSupportedInterfaceOrientations:)]) {
-        // 调用代理的方法获取支持的界面方向掩码
         return [self.zhh_delegate navigationControllerSupportedInterfaceOrientations:navigationController];
     }
-    // 如果代理未实现，则默认返回支持所有界面方向
     return UIInterfaceOrientationMaskAll;
 }
 
-/**
- * 返回首选的界面方向用于展示。
- *
- * @param navigationController 当前的导航控制器。
- * @return 首选的界面方向，默认返回 UIInterfaceOrientationPortrait。
- */
+/// 返回首选的界面方向用于展示。
+/// @param navigationController 当前的导航控制器。
+/// @return 首选的界面方向，默认返回 UIInterfaceOrientationPortrait。
 - (UIInterfaceOrientation)navigationControllerPreferredInterfaceOrientationForPresentation:(UINavigationController *)navigationController {
-    // 如果代理实现了 `navigationControllerPreferredInterfaceOrientationForPresentation:` 方法
     if ([self.zhh_delegate respondsToSelector:@selector(navigationControllerPreferredInterfaceOrientationForPresentation:)]) {
-        // 调用代理的方法获取首选的界面方向
         return [self.zhh_delegate navigationControllerPreferredInterfaceOrientationForPresentation:navigationController];
     }
-    // 如果代理未实现，则默认返回竖屏方向
     return UIInterfaceOrientationPortrait;
 }
 
 #pragma mark - UINavigationControllerDelegate Methods
 
-/**
- * 返回交互式转场的控制器（如果存在）。
- *
- * @param navigationController 当前的导航控制器。
- * @param animationController 当前用于转场动画的控制器。
- * @return 实现了 `UIViewControllerInteractiveTransitioning` 协议的交互式转场控制器，或 `nil` 如果没有交互式转场。
- */
+/// 返回交互式转场的控制器（如果存在）。
+/// @param navigationController 当前的导航控制器。
+/// @param animationController 当前用于转场动画的控制器。
+/// @return 实现了 `UIViewControllerInteractiveTransitioning` 协议的交互式转场控制器，或 `nil` 如果没有交互式转场。
 - (id <UIViewControllerInteractiveTransitioning>)navigationController:(UINavigationController *)navigationController
                           interactionControllerForAnimationController:(id <UIViewControllerAnimatedTransitioning>)animationController {
-    // 如果代理实现了 `navigationController:interactionControllerForAnimationController:` 方法
     if ([self.zhh_delegate respondsToSelector:@selector(navigationController:interactionControllerForAnimationController:)]) {
-        // 调用代理的方法来获取交互式转场控制器
         return [self.zhh_delegate navigationController:navigationController interactionControllerForAnimationController:animationController];
     }
     
-    // 如果动画控制器实现了 `zhh_interactiveTransitioning` 方法
     if ([animationController respondsToSelector:@selector(zhh_interactiveTransitioning)]) {
-        // 调用动画控制器的 `zhh_interactiveTransitioning` 方法获取交互式转场控制器
         return [((id <ZHHViewControllerAnimatedTransitioning>)animationController) zhh_interactiveTransitioning];
     }
-    
-    // 如果没有提供交互式转场控制器，返回 nil
     return nil;
 }
 
 #pragma mark - UINavigationControllerDelegate Methods
 
-/**
- * 返回与导航操作相关联的动画控制器。
- *
- * @param navigationController 当前的导航控制器。
- * @param operation 导航操作类型（如推送或弹出）。
- * @param fromVC 动画开始时的视图控制器。
- * @param toVC 动画结束时的视图控制器。
- * @return 实现了 `UIViewControllerAnimatedTransitioning` 协议的动画控制器。
- */
+/// 返回与导航操作相关联的动画控制器。
+/// @param navigationController 当前的导航控制器。
+/// @param operation 导航操作类型（如推送或弹出）。
+/// @param fromVC 动画开始时的视图控制器。
+/// @param toVC 动画结束时的视图控制器。
+/// @return 实现了 `UIViewControllerAnimatedTransitioning` 协议的动画控制器。
 - (id <UIViewControllerAnimatedTransitioning>)navigationController:(UINavigationController *)navigationController
                                    animationControllerForOperation:(UINavigationControllerOperation)operation
                                                 fromViewController:(UIViewController *)fromVC
@@ -1423,42 +1168,31 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         self.interactivePopGestureRecognizer.enabled = NO;
     }
     
-    // 如果代理实现了 `navigationController:animationControllerForOperation:fromViewController:toViewController:` 方法
     if ([self.zhh_delegate respondsToSelector:@selector(navigationController:animationControllerForOperation:fromViewController:toViewController:)]) {
-        // 调用代理的方法来获取相应的动画控制器
         return [self.zhh_delegate navigationController:navigationController
                        animationControllerForOperation:operation
                                     fromViewController:ZHHSafeUnwrapViewController(fromVC)
                                       toViewController:ZHHSafeUnwrapViewController(toVC)];
     }
     
-    // 如果代理未实现，则根据操作类型返回适当的动画控制器
     return operation == UINavigationControllerOperationPush ? [toVC zhh_animatedTransitioning] : [fromVC zhh_animatedTransitioning];
 }
 
 #pragma mark - UIGestureRecognizerDelegate
 
-/**
- * 确定两个手势识别器是否可以同时识别手势。
- *
- * @param gestureRecognizer 当前的手势识别器。
- * @param otherGestureRecognizer 另一个手势识别器。
- * @return 如果两个手势识别器可以同时识别手势，则返回 `YES`；否则返回 `NO`。
- */
+/// 确定两个手势识别器是否可以同时识别手势。
+/// @param gestureRecognizer 当前的手势识别器。
+/// @param otherGestureRecognizer 另一个手势识别器。
+/// @return 如果两个手势识别器可以同时识别手势，则返回 `YES`；否则返回 `NO`。
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    // 只有当手势识别器是 `interactivePopGestureRecognizer` 时，才允许同时识别
     return (gestureRecognizer == self.interactivePopGestureRecognizer);
 }
 
-/**
- * 确定某个手势识别器是否应被要求在另一个手势识别器失败之前失败。
- *
- * @param gestureRecognizer 当前的手势识别器。
- * @param otherGestureRecognizer 另一个手势识别器。
- * @return 如果当前手势识别器应该在另一个手势识别器失败之前失败，则返回 `YES`；否则返回 `NO`。
- */
+/// 确定某个手势识别器是否应被要求在另一个手势识别器失败之前失败。
+/// @param gestureRecognizer 当前的手势识别器。
+/// @param otherGestureRecognizer 另一个手势识别器。
+/// @return 如果当前手势识别器应该在另一个手势识别器失败之前失败，则返回 `YES`；否则返回 `NO`。
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldBeRequiredToFailByGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    // 只有当手势识别器是 `interactivePopGestureRecognizer` 时，才允许被要求在其他手势识别器失败之前失败
     return (gestureRecognizer == self.interactivePopGestureRecognizer);
 }
 @end

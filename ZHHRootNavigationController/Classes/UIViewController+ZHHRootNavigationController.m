@@ -11,21 +11,22 @@
 #import <objc/runtime.h>
 
 @implementation UIViewController (ZHHRootNavigationController)
-@dynamic zhh_disableInteractivePop;
 
-- (void)setZhh_disableInteractivePop:(BOOL)zhh_disableInteractivePop {
-    // 使用关联对象设置属性值
-    objc_setAssociatedObject(self, @selector(zhh_disableInteractivePop), @(zhh_disableInteractivePop), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+#pragma mark - 禁用边缘滑动返回手势
+
+@dynamic zhh_disableEdgePopGesture;
+
+- (void)setZhh_disableEdgePopGesture:(BOOL)zhh_disableEdgePopGesture {
+    objc_setAssociatedObject(self, @selector(zhh_disableEdgePopGesture), @(zhh_disableEdgePopGesture), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     
-    // 如果当前视图控制器是导航控制器的顶部视图控制器，设置交互式弹出手势的使能状态
     if (self.zhh_navigationController.zhh_topViewController == self) {
-        self.zhh_navigationController.interactivePopGestureRecognizer.enabled = !zhh_disableInteractivePop;
+        self.zhh_navigationController.interactivePopGestureRecognizer.enabled = !zhh_disableEdgePopGesture;
     }
 }
 
-- (BOOL)zhh_disableInteractivePop {
+- (BOOL)zhh_disableEdgePopGesture {
     // 获取关联对象中的属性值
-    return [objc_getAssociatedObject(self, @selector(zhh_disableInteractivePop)) boolValue];
+    return [objc_getAssociatedObject(self, @selector(zhh_disableEdgePopGesture)) boolValue];
 }
 
 - (Class)zhh_navigationBarClass {

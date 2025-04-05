@@ -8,10 +8,27 @@ platform :ios, '13.0'
 
 target 'ZHHRootNavigationController_Example' do
   pod 'ZHHRootNavigationController', :path => '../'
-
+  pod 'Masonry'  # 自动布局框架，简化 AutoLayout 使用
+  pod 'ZHHAnneKit'  # 自定义开发的工具库（常见功能封装）
+#  pod 'RTRootNavigationController'  # 自定义开发的工具库（常见功能封装）
   target 'ZHHRootNavigationController_Tests' do
     inherit! :search_paths
 
     
   end
+end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+              # 设置 iOS 部署目标为 13.0
+              config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
+              # 禁用 Bitcode
+              config.build_settings['ENABLE_BITCODE'] = 'NO' # 禁用 Bitcode 以兼容部分库
+              # 禁用代码签名，特别适用于模拟器
+              config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = '' # 清空扩展的代码签名身份
+              config.build_settings['CODE_SIGNING_REQUIRED'] = 'NO' # 禁用代码签名的强制要求
+              config.build_settings['CODE_SIGNING_ALLOWED'] = 'NO' # 禁用代码签名
+        end
+    end
 end

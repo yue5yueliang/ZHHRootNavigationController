@@ -21,8 +21,11 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		703B6886DACE50F93FEFC4E9 /* Pods_ZHHRootNavigationController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A53A065029B7D25218105F /* Pods_ZHHRootNavigationController_Tests.framework */; };
-		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
-		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
+		7E3E99942DA104D400219802 /* ZHHHiddenStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E99932DA104D400219802 /* ZHHHiddenStatusViewController.m */; };
+		7E3E99972DA105F200219802 /* ZHHCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E99962DA105F200219802 /* ZHHCommonViewController.m */; };
+		7E3E99992DA106AE00219802 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E3E99982DA106AE00219802 /* Launch Screen.storyboard */; };
+		7E3E99A52DA10CA000219802 /* ZHHNormalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E99A42DA10CA000219802 /* ZHHNormalViewController.m */; };
+		7E3E99A82DA1118200219802 /* ZHHDisablePopGestureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E99A72DA1118200219802 /* ZHHDisablePopGestureController.m */; };
 		9F2F19545D66038C9962990D /* Pods_ZHHRootNavigationController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA56FD8207124630E350C44 /* Pods_ZHHRootNavigationController_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,9 +65,16 @@
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		66C03C2F81BE5B2825D58665 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		699481E5FF5B713D23F94E70 /* Pods-ZHHRootNavigationController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZHHRootNavigationController_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ZHHRootNavigationController_Tests/Pods-ZHHRootNavigationController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		74812BF248D8C5BEDEA0708F /* Pods-ZHHRootNavigationController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZHHRootNavigationController_Example.debug.xcconfig"; path = "Target Support Files/Pods-ZHHRootNavigationController_Example/Pods-ZHHRootNavigationController_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7E3E99922DA104D400219802 /* ZHHHiddenStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHHiddenStatusViewController.h; sourceTree = "<group>"; };
+		7E3E99932DA104D400219802 /* ZHHHiddenStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHHiddenStatusViewController.m; sourceTree = "<group>"; };
+		7E3E99952DA105F200219802 /* ZHHCommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHCommonViewController.h; sourceTree = "<group>"; };
+		7E3E99962DA105F200219802 /* ZHHCommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHCommonViewController.m; sourceTree = "<group>"; };
+		7E3E99982DA106AE00219802 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		7E3E99A32DA10CA000219802 /* ZHHNormalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHNormalViewController.h; sourceTree = "<group>"; };
+		7E3E99A42DA10CA000219802 /* ZHHNormalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHNormalViewController.m; sourceTree = "<group>"; };
+		7E3E99A62DA1118200219802 /* ZHHDisablePopGestureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHDisablePopGestureController.h; sourceTree = "<group>"; };
+		7E3E99A72DA1118200219802 /* ZHHDisablePopGestureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHDisablePopGestureController.m; sourceTree = "<group>"; };
 		8EA56FD8207124630E350C44 /* Pods_ZHHRootNavigationController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZHHRootNavigationController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C69EBFFE5C52C6AC81B85A70 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,12 +153,12 @@
 		6003F593195388D20070C39A /* Example for ZHHRootNavigationController */ = {
 			isa = PBXGroup;
 			children = (
+				7E3E99912DA1030900219802 /* Modules */,
 				6003F59C195388D20070C39A /* ZHHAppDelegate.h */,
 				6003F59D195388D20070C39A /* ZHHAppDelegate.m */,
-				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* ZHHViewController.h */,
 				6003F5A6195388D20070C39A /* ZHHViewController.m */,
-				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
+				7E3E99982DA106AE00219802 /* Launch Screen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -194,6 +204,93 @@
 				C69EBFFE5C52C6AC81B85A70 /* LICENSE */,
 			);
 			name = "Podspec Metadata";
+			sourceTree = "<group>";
+		};
+		7E3E99912DA1030900219802 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				7E3E99A22DA10AC500219802 /* 禁用侧滑返回 */,
+				7E3E99A12DA10ABE00219802 /* 普通导航栏 */,
+				7E3E99A02DA10AB400219802 /* 隐藏导航栏 */,
+				7E3E999F2DA10AA800219802 /* 包含 ScrollView */,
+				7E3E999E2DA10A9700219802 /* Push 并移除当前页面 */,
+				7E3E999D2DA10A8000219802 /* TableView 使用自定义导航栏类 */,
+				7E3E999C2DA10A7500219802 /* 自定义转场动画 */,
+				7E3E999B2DA10A6000219802 /* 带工具栏页面 */,
+				7E3E999A2DA10A4B00219802 /* 隐藏状态栏 */,
+				7E3E99952DA105F200219802 /* ZHHCommonViewController.h */,
+				7E3E99962DA105F200219802 /* ZHHCommonViewController.m */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		7E3E999A2DA10A4B00219802 /* 隐藏状态栏 */ = {
+			isa = PBXGroup;
+			children = (
+				7E3E99922DA104D400219802 /* ZHHHiddenStatusViewController.h */,
+				7E3E99932DA104D400219802 /* ZHHHiddenStatusViewController.m */,
+			);
+			path = "隐藏状态栏";
+			sourceTree = "<group>";
+		};
+		7E3E999B2DA10A6000219802 /* 带工具栏页面 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "带工具栏页面";
+			sourceTree = "<group>";
+		};
+		7E3E999C2DA10A7500219802 /* 自定义转场动画 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "自定义转场动画";
+			sourceTree = "<group>";
+		};
+		7E3E999D2DA10A8000219802 /* TableView 使用自定义导航栏类 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "TableView 使用自定义导航栏类";
+			sourceTree = "<group>";
+		};
+		7E3E999E2DA10A9700219802 /* Push 并移除当前页面 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Push 并移除当前页面";
+			sourceTree = "<group>";
+		};
+		7E3E999F2DA10AA800219802 /* 包含 ScrollView */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "包含 ScrollView";
+			sourceTree = "<group>";
+		};
+		7E3E99A02DA10AB400219802 /* 隐藏导航栏 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "隐藏导航栏";
+			sourceTree = "<group>";
+		};
+		7E3E99A12DA10ABE00219802 /* 普通导航栏 */ = {
+			isa = PBXGroup;
+			children = (
+				7E3E99A32DA10CA000219802 /* ZHHNormalViewController.h */,
+				7E3E99A42DA10CA000219802 /* ZHHNormalViewController.m */,
+			);
+			path = "普通导航栏";
+			sourceTree = "<group>";
+		};
+		7E3E99A22DA10AC500219802 /* 禁用侧滑返回 */ = {
+			isa = PBXGroup;
+			children = (
+				7E3E99A62DA1118200219802 /* ZHHDisablePopGestureController.h */,
+				7E3E99A72DA1118200219802 /* ZHHDisablePopGestureController.m */,
+			);
+			path = "禁用侧滑返回";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -245,7 +342,7 @@
 			attributes = {
 				CLASSPREFIX = ZHH;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "136769890@qq.com";
+				ORGANIZATIONNAME = "桃色三岁";
 				TargetAttributes = {
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
@@ -277,8 +374,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
-				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
+				7E3E99992DA106AE00219802 /* Launch Screen.storyboard in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
@@ -302,10 +398,14 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-ZHHRootNavigationController_Example/Pods-ZHHRootNavigationController_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/ZHHAnneKit/ZHHAnneKit.framework",
 				"${BUILT_PRODUCTS_DIR}/ZHHRootNavigationController/ZHHRootNavigationController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZHHAnneKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZHHRootNavigationController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -364,9 +464,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7E3E99A52DA10CA000219802 /* ZHHNormalViewController.m in Sources */,
 				6003F59E195388D20070C39A /* ZHHAppDelegate.m in Sources */,
+				7E3E99A82DA1118200219802 /* ZHHDisablePopGestureController.m in Sources */,
 				6003F5A7195388D20070C39A /* ZHHViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				7E3E99972DA105F200219802 /* ZHHCommonViewController.m in Sources */,
+				7E3E99942DA104D400219802 /* ZHHHiddenStatusViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -403,14 +507,6 @@
 				6003F5B9195388D20070C39A /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				71719F9E1E33DC2100824A3D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -499,6 +595,7 @@
 				INFOPLIST_FILE = "ZHHRootNavigationController/ZHHRootNavigationController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULE_NAME = ExampleApp;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -516,6 +613,7 @@
 				INFOPLIST_FILE = "ZHHRootNavigationController/ZHHRootNavigationController-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MODULE_NAME = ExampleApp;
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

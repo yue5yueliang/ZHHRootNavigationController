@@ -6,8 +6,8 @@
 //  Copyright (c) 2025 桃色三岁. All rights reserved.
 //
 
-@import UIKit;
+#import "ZHHCommonViewController.h"
 
-@interface ZHHViewController : UIViewController
+@interface ZHHViewController : ZHHCommonViewController
 
 @end

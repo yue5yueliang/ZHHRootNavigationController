@@ -122,7 +122,7 @@ static void zhh_swizzle_selector(Class cls, SEL origin, SEL swizzle) {
         case UIGestureRecognizerStateBegan:
         {
             // 手势开始时，获取当前视图控制器的下一个兄弟视图控制器
-            UIViewController *nextSiblingController = [self.topViewController zhh_nextSiblingController];
+            UIViewController *nextSiblingController = [self.topViewController zhh_nextPushViewController];
             if (nextSiblingController) {
                 // 设置自定义过渡代理
                 [self _setTransitionDelegate:[ZHHNavigationDelegater delegaterWithNavigationController:self]];
@@ -188,18 +188,18 @@ static void zhh_swizzle_selector(Class cls, SEL origin, SEL swizzle) {
 }
 
 // 设置是否启用交互式推送的状态
-- (void)setZhh_enableInteractivePush:(BOOL)enableInteractivePush {
+- (void)setZhh_enableInteractivePush:(BOOL)zhh_enableInteractivePush {
     // 获取当前的启用状态
     BOOL enabled = self.zhh_isInteractivePushEnabled;
     
     // 如果当前状态与设置的新状态不同，则更新状态
-    if (enabled != enableInteractivePush) {
+    if (enabled != zhh_enableInteractivePush) {
         // 使用关联对象设置新状态
-        objc_setAssociatedObject(self, @selector(setZhh_enableInteractivePush:), @(enableInteractivePush), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, @selector(setZhh_enableInteractivePush:), @(zhh_enableInteractivePush), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 
         // 如果视图已经加载，根据启用状态配置交互式推送
         if (self.isViewLoaded) {
-            if (enableInteractivePush) {
+            if (zhh_enableInteractivePush) {
                 [self zhh_setupInteractivePush];
             }
             else {
@@ -242,7 +242,7 @@ static void zhh_swizzle_selector(Class cls, SEL origin, SEL swizzle) {
 @implementation UIViewController (ZHHInteractivePush)
 
 // 获取当前视图控制器的下一个兄弟视图控制器
-- (nullable __kindof UIViewController *)zhh_nextSiblingController {
+- (nullable __kindof UIViewController *)zhh_nextPushViewController {
     // 默认实现返回 nil，子类或特定情况下可以重写这个方法来提供实际的下一个视图控制器
     return nil;
 }
