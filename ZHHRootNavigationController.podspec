@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'ZHHRootNavigationController'
-  s.version          = '0.0.3'
+  s.version          = '0.0.4'
   s.summary          = '自定义导航控制器，支持每个视图控制器独立导航栏，全屏滑动返回、可配置滑动范围，并支持右侧边缘左滑 push 控制器。'
 
   s.description = <<-DESC
