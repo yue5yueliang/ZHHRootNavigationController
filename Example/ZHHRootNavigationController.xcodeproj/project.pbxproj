@@ -26,6 +26,7 @@
 		7E3E99992DA106AE00219802 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E3E99982DA106AE00219802 /* Launch Screen.storyboard */; };
 		7E3E99A52DA10CA000219802 /* ZHHNormalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E99A42DA10CA000219802 /* ZHHNormalViewController.m */; };
 		7E3E99A82DA1118200219802 /* ZHHDisablePopGestureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E99A72DA1118200219802 /* ZHHDisablePopGestureController.m */; };
+		7EF3AF1E2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF3AF1D2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.m */; };
 		9F2F19545D66038C9962990D /* Pods_ZHHRootNavigationController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA56FD8207124630E350C44 /* Pods_ZHHRootNavigationController_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +76,8 @@
 		7E3E99A42DA10CA000219802 /* ZHHNormalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHNormalViewController.m; sourceTree = "<group>"; };
 		7E3E99A62DA1118200219802 /* ZHHDisablePopGestureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHDisablePopGestureController.h; sourceTree = "<group>"; };
 		7E3E99A72DA1118200219802 /* ZHHDisablePopGestureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHDisablePopGestureController.m; sourceTree = "<group>"; };
+		7EF3AF1C2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHPushAndRemoveViewController.h; sourceTree = "<group>"; };
+		7EF3AF1D2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHPushAndRemoveViewController.m; sourceTree = "<group>"; };
 		8EA56FD8207124630E350C44 /* Pods_ZHHRootNavigationController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZHHRootNavigationController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C69EBFFE5C52C6AC81B85A70 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -257,6 +260,8 @@
 		7E3E999E2DA10A9700219802 /* Push 并移除当前页面 */ = {
 			isa = PBXGroup;
 			children = (
+				7EF3AF1C2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.h */,
+				7EF3AF1D2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.m */,
 			);
 			path = "Push 并移除当前页面";
 			sourceTree = "<group>";
@@ -466,6 +471,7 @@
 			files = (
 				7E3E99A52DA10CA000219802 /* ZHHNormalViewController.m in Sources */,
 				6003F59E195388D20070C39A /* ZHHAppDelegate.m in Sources */,
+				7EF3AF1E2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.m in Sources */,
 				7E3E99A82DA1118200219802 /* ZHHDisablePopGestureController.m in Sources */,
 				6003F5A7195388D20070C39A /* ZHHViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,

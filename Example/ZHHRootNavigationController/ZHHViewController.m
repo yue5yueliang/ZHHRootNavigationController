@@ -69,6 +69,8 @@
             break;
         case 4:
             /// Push 并移除当前页面
+            [self zhh_pushViewControllerWithClassName:@"ZHHPushAndRemoveViewController" title:@"Push 并移除当前页面"];
+
             break;
         case 5:
             /// TableView 使用自定义导航栏类

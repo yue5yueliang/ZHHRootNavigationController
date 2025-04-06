@@ -963,8 +963,29 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         self.animationBlock(NO);
     }
     
-    self.animationBlock = block;
-    [self pushViewController:viewController animated:animated];
+    if (animated) {
+            // 系统自带动画
+            [self pushViewController:viewController animated:YES];
+        } else {
+            // 使用 fade 动画替代无动画情况
+            CATransition *transition = [CATransition animation];
+            transition.duration = 0.35;
+            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+            transition.type = kCATransitionFade;
+
+            [self.view.layer addAnimation:transition forKey:nil];
+
+            // 实际 push 不带动画，动画由 CATransition 接管
+            [self pushViewController:viewController animated:NO];
+        }
+
+        // 动画完成后触发 block
+        if (block) {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)),
+                           dispatch_get_main_queue(), ^{
+                block(YES);
+            });
+        }
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated complete:(void (^)(BOOL))block {
