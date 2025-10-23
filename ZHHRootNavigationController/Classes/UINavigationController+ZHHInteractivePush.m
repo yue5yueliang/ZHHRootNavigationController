@@ -11,6 +11,11 @@
 
 #import <UIKit/UIKit.h>
 
+// 常量定义
+const CGFloat ZHHInteractivePushVelocityThreshold = 200.0;  // 手势速度阈值
+const CGFloat ZHHInteractivePushPercentThreshold = 0.5;      // 转场完成百分比阈值
+const CGFloat ZHHInteractivePushLeftViewOffsetRatio = 112.0 / 375.0;  // 左侧视图偏移比例
+
 // 方法交换函数
 static void zhh_swizzle_selector(Class cls, SEL origin, SEL swizzle) {
     // 使用 class_getInstanceMethod 获取方法实现
@@ -74,9 +79,13 @@ static void zhh_swizzle_selector(Class cls, SEL origin, SEL swizzle) {
     self.zhh_originDelegate = self.delegate;
     
     // 使用方法交换机制调用原始的 setDelegate: 方法
-    void (*setDelegate)(id, SEL, id<UINavigationControllerDelegate>) = (void(*)(id, SEL, id<UINavigationControllerDelegate>))[UINavigationController instanceMethodForSelector:@selector(setDelegate:)];
-    if (setDelegate) {
+    IMP setDelegateIMP = [UINavigationController instanceMethodForSelector:@selector(setDelegate:)];
+    if (setDelegateIMP) {
+        void (*setDelegate)(id, SEL, id<UINavigationControllerDelegate>) = 
+            (void(*)(id, SEL, id<UINavigationControllerDelegate>))setDelegateIMP;
         setDelegate(self, @selector(setDelegate:), delegate);
+    } else {
+        NSLog(@"⚠️ 获取 setDelegate: 方法实现失败");
     }
 }
 
@@ -150,13 +159,13 @@ static void zhh_swizzle_selector(Class cls, SEL origin, SEL swizzle) {
             CGPoint velocity = [gesture velocityInView:gesture.view];
 
             // 根据速度和过渡进度来决定是完成过渡还是取消过渡
-            if (velocity.x < -200) {
+            if (velocity.x < -ZHHInteractivePushVelocityThreshold) {
                 [self.zhh_interactiveTransition finishInteractiveTransition];
             }
-            else if (velocity.x > 200) {
+            else if (velocity.x > ZHHInteractivePushVelocityThreshold) {
                 [self.zhh_interactiveTransition cancelInteractiveTransition];
             }
-            else if (self.zhh_interactiveTransition.percentComplete > 0.5) {
+            else if (self.zhh_interactiveTransition.percentComplete > ZHHInteractivePushPercentThreshold) {
                 [self.zhh_interactiveTransition finishInteractiveTransition];
             }
             else {
@@ -206,8 +215,11 @@ static void zhh_swizzle_selector(Class cls, SEL origin, SEL swizzle) {
                 [self zhh_distroyInteractivePush];
             }
         } else {
-            // 如果视图尚未加载，交换 `viewDidLoad` 方法
-            zhh_swizzle_selector(self.class, @selector(viewDidLoad), @selector(zhh_viewDidLoad));
+            // 如果视图尚未加载，使用dispatch_once确保只交换一次方法
+            static dispatch_once_t onceToken;
+            dispatch_once(&onceToken, ^{
+                zhh_swizzle_selector(self.class, @selector(viewDidLoad), @selector(zhh_viewDidLoad));
+            });
         }
     }
 }
@@ -383,8 +395,8 @@ static void zhh_swizzle_selector(Class cls, SEL origin, SEL swizzle) {
                       duration:[self transitionDuration:transitionContext]
                        options:[transitionContext isInteractive] ? UIViewAnimationOptionCurveLinear : UIViewAnimationOptionCurveEaseIn
                     animations:^{
-                        // 源视图左移一定距离
-                        fromVC.view.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(containerView.bounds) * 112 / 375, 0);
+                        // 源视图左移一定距离（使用常量定义的比例）
+                        fromVC.view.transform = CGAffineTransformMakeTranslation(-CGRectGetWidth(containerView.bounds) * ZHHInteractivePushLeftViewOffsetRatio, 0);
                         // 包装视图回到原位置
                         wrapperView.transform = CGAffineTransformIdentity;
                         // 渐显阴影

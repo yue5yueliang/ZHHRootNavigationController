@@ -1,110 +1,125 @@
 PODS:
   - Masonry (1.1.0)
-  - ZHHAnneKit (0.1.9):
-    - ZHHAnneKit/BadgeView (= 0.1.9)
-    - ZHHAnneKit/CommonTools (= 0.1.9)
-    - ZHHAnneKit/Foundation (= 0.1.9)
-    - ZHHAnneKit/QuartzCore (= 0.1.9)
-    - ZHHAnneKit/UIKit (= 0.1.9)
-  - ZHHAnneKit/BadgeView (0.1.9)
-  - ZHHAnneKit/CommonTools (0.1.9):
-    - ZHHAnneKit/UIKit/UITableView
-  - ZHHAnneKit/Foundation (0.1.9):
-    - ZHHAnneKit/Foundation/NSArray (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSAttributedString (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSBundle (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSData (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSDate (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSDecimalNumber (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSDictionary (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSException (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSFileManager (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSIndexPath (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSNotification (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSNotificationCenter (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSNumber (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSObject (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSShadow (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSString (= 0.1.9)
-    - ZHHAnneKit/Foundation/NSTimer (= 0.1.9)
-  - ZHHAnneKit/Foundation/NSArray (0.1.9)
-  - ZHHAnneKit/Foundation/NSAttributedString (0.1.9)
-  - ZHHAnneKit/Foundation/NSBundle (0.1.9)
-  - ZHHAnneKit/Foundation/NSData (0.1.9)
-  - ZHHAnneKit/Foundation/NSDate (0.1.9)
-  - ZHHAnneKit/Foundation/NSDecimalNumber (0.1.9)
-  - ZHHAnneKit/Foundation/NSDictionary (0.1.9)
-  - ZHHAnneKit/Foundation/NSException (0.1.9)
-  - ZHHAnneKit/Foundation/NSFileManager (0.1.9)
-  - ZHHAnneKit/Foundation/NSIndexPath (0.1.9)
-  - ZHHAnneKit/Foundation/NSNotification (0.1.9)
-  - ZHHAnneKit/Foundation/NSNotificationCenter (0.1.9)
-  - ZHHAnneKit/Foundation/NSNumber (0.1.9)
-  - ZHHAnneKit/Foundation/NSObject (0.1.9)
-  - ZHHAnneKit/Foundation/NSShadow (0.1.9)
-  - ZHHAnneKit/Foundation/NSString (0.1.9)
-  - ZHHAnneKit/Foundation/NSTimer (0.1.9)
-  - ZHHAnneKit/QuartzCore (0.1.9):
-    - ZHHAnneKit/QuartzCore/CALayer (= 0.1.9)
-    - ZHHAnneKit/QuartzCore/CATransaction (= 0.1.9)
-  - ZHHAnneKit/QuartzCore/CALayer (0.1.9)
-  - ZHHAnneKit/QuartzCore/CATransaction (0.1.9)
-  - ZHHAnneKit/UIKit (0.1.9):
-    - ZHHAnneKit/UIKit/UIApplication (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIBarButtonItem (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIButton (= 0.1.9)
-    - ZHHAnneKit/UIKit/UICollectionView (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIColor (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIControl (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIDevice (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIImage (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIImageView (= 0.1.9)
-    - ZHHAnneKit/UIKit/UILabel (= 0.1.9)
-    - ZHHAnneKit/UIKit/UINavigationBar (= 0.1.9)
-    - ZHHAnneKit/UIKit/UINavigationController (= 0.1.9)
-    - ZHHAnneKit/UIKit/UINavigationItem (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIScrollView (= 0.1.9)
-    - ZHHAnneKit/UIKit/UISlider (= 0.1.9)
-    - ZHHAnneKit/UIKit/UISplitViewController (= 0.1.9)
-    - ZHHAnneKit/UIKit/UITabBarItem (= 0.1.9)
-    - ZHHAnneKit/UIKit/UITableView (= 0.1.9)
-    - ZHHAnneKit/UIKit/UITextField (= 0.1.9)
-    - ZHHAnneKit/UIKit/UITextView (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIView (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIViewController (= 0.1.9)
-    - ZHHAnneKit/UIKit/UIWindow (= 0.1.9)
-  - ZHHAnneKit/UIKit/UIApplication (0.1.9)
-  - ZHHAnneKit/UIKit/UIBarButtonItem (0.1.9):
-    - ZHHAnneKit/UIKit/UIColor
-    - ZHHAnneKit/UIKit/UIView
-  - ZHHAnneKit/UIKit/UIButton (0.1.9):
-    - ZHHAnneKit/UIKit/UIImage
-  - ZHHAnneKit/UIKit/UICollectionView (0.1.9)
-  - ZHHAnneKit/UIKit/UIColor (0.1.9)
-  - ZHHAnneKit/UIKit/UIControl (0.1.9)
-  - ZHHAnneKit/UIKit/UIDevice (0.1.9):
-    - ZHHAnneKit/CommonTools
-  - ZHHAnneKit/UIKit/UIImage (0.1.9):
-    - ZHHAnneKit/UIKit/UIColor
-  - ZHHAnneKit/UIKit/UIImageView (0.1.9)
-  - ZHHAnneKit/UIKit/UILabel (0.1.9):
-    - ZHHAnneKit/UIKit/UIView
-  - ZHHAnneKit/UIKit/UINavigationBar (0.1.9)
-  - ZHHAnneKit/UIKit/UINavigationController (0.1.9)
-  - ZHHAnneKit/UIKit/UINavigationItem (0.1.9)
-  - ZHHAnneKit/UIKit/UIScrollView (0.1.9)
-  - ZHHAnneKit/UIKit/UISlider (0.1.9)
-  - ZHHAnneKit/UIKit/UISplitViewController (0.1.9)
-  - ZHHAnneKit/UIKit/UITabBarItem (0.1.9)
-  - ZHHAnneKit/UIKit/UITableView (0.1.9)
-  - ZHHAnneKit/UIKit/UITextField (0.1.9)
-  - ZHHAnneKit/UIKit/UITextView (0.1.9)
-  - ZHHAnneKit/UIKit/UIView (0.1.9)
-  - ZHHAnneKit/UIKit/UIViewController (0.1.9)
-  - ZHHAnneKit/UIKit/UIWindow (0.1.9)
-  - ZHHRootNavigationController (0.0.2):
-    - ZHHRootNavigationController/Core (= 0.0.2)
-  - ZHHRootNavigationController/Core (0.0.2)
+  - ZHHAnneKit (0.2.2):
+    - ZHHAnneKit/Core (= 0.2.2)
+  - ZHHAnneKit/Core (0.2.2):
+    - ZHHAnneKit/Core/BadgeView (= 0.2.2)
+    - ZHHAnneKit/Core/CommonTools (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation (= 0.2.2)
+    - ZHHAnneKit/Core/QuartzCore (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit (= 0.2.2)
+  - ZHHAnneKit/Core/BadgeView (0.2.2):
+    - ZHHAnneKit/Core/UIKit/UIColor
+  - ZHHAnneKit/Core/CommonTools (0.2.2):
+    - ZHHAnneKit/Core/CommonTools/Common (= 0.2.2)
+    - ZHHAnneKit/Core/CommonTools/Countdown (= 0.2.2)
+    - ZHHAnneKit/Core/CommonTools/Hovering (= 0.2.2)
+    - ZHHAnneKit/Core/CommonTools/Keychain (= 0.2.2)
+    - ZHHAnneKit/Core/CommonTools/Permission (= 0.2.2)
+  - ZHHAnneKit/Core/CommonTools/Common (0.2.2)
+  - ZHHAnneKit/Core/CommonTools/Countdown (0.2.2)
+  - ZHHAnneKit/Core/CommonTools/Hovering (0.2.2):
+    - ZHHAnneKit/Core/UIKit/UITableView
+  - ZHHAnneKit/Core/CommonTools/Keychain (0.2.2)
+  - ZHHAnneKit/Core/CommonTools/Permission (0.2.2)
+  - ZHHAnneKit/Core/Foundation (0.2.2):
+    - ZHHAnneKit/Core/Foundation/NSArray (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSAttributedString (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSBundle (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSData (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSDate (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSDecimalNumber (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSDictionary (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSException (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSFileManager (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSIndexPath (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSNotification (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSNotificationCenter (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSNumber (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSObject (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSShadow (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSString (= 0.2.2)
+    - ZHHAnneKit/Core/Foundation/NSTimer (= 0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSArray (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSAttributedString (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSBundle (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSData (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSDate (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSDecimalNumber (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSDictionary (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSException (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSFileManager (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSIndexPath (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSNotification (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSNotificationCenter (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSNumber (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSObject (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSShadow (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSString (0.2.2)
+  - ZHHAnneKit/Core/Foundation/NSTimer (0.2.2)
+  - ZHHAnneKit/Core/QuartzCore (0.2.2):
+    - ZHHAnneKit/Core/QuartzCore/CALayer (= 0.2.2)
+    - ZHHAnneKit/Core/QuartzCore/CATransaction (= 0.2.2)
+  - ZHHAnneKit/Core/QuartzCore/CALayer (0.2.2)
+  - ZHHAnneKit/Core/QuartzCore/CATransaction (0.2.2)
+  - ZHHAnneKit/Core/UIKit (0.2.2):
+    - ZHHAnneKit/Core/UIKit/UIApplication (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIBarButtonItem (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIButton (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UICollectionView (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIColor (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIControl (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIDevice (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIImage (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIImageView (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UILabel (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UINavigationBar (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UINavigationController (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UINavigationItem (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIScrollView (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UISlider (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UISplitViewController (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UITabBarItem (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UITableView (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UITextField (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UITextView (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIView (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIViewController (= 0.2.2)
+    - ZHHAnneKit/Core/UIKit/UIWindow (= 0.2.2)
+  - ZHHAnneKit/Core/UIKit/UIApplication (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UIBarButtonItem (0.2.2):
+    - ZHHAnneKit/Core/UIKit/UIColor
+    - ZHHAnneKit/Core/UIKit/UIView
+  - ZHHAnneKit/Core/UIKit/UIButton (0.2.2):
+    - ZHHAnneKit/Core/UIKit/UIImage
+  - ZHHAnneKit/Core/UIKit/UICollectionView (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UIColor (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UIControl (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UIDevice (0.2.2):
+    - ZHHAnneKit/Core/CommonTools
+  - ZHHAnneKit/Core/UIKit/UIImage (0.2.2):
+    - ZHHAnneKit/Core/UIKit/UIColor
+  - ZHHAnneKit/Core/UIKit/UIImageView (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UILabel (0.2.2):
+    - ZHHAnneKit/Core/UIKit/UIView
+  - ZHHAnneKit/Core/UIKit/UINavigationBar (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UINavigationController (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UINavigationItem (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UIScrollView (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UISlider (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UISplitViewController (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UITabBarItem (0.2.2):
+    - ZHHAnneKit/Core/UIKit/UIColor
+    - ZHHAnneKit/Core/UIKit/UIView
+  - ZHHAnneKit/Core/UIKit/UITableView (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UITextField (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UITextView (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UIView (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UIViewController (0.2.2)
+  - ZHHAnneKit/Core/UIKit/UIWindow (0.2.2)
+  - ZHHRootNavigationController (0.0.5):
+    - ZHHRootNavigationController/Core (= 0.0.5)
+  - ZHHRootNavigationController/Core (0.0.5)
 
 DEPENDENCIES:
   - Masonry
@@ -122,8 +137,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  ZHHAnneKit: 1de4adaf1af91d413ce6903b34569d423e5f14ea
-  ZHHRootNavigationController: 242aba5ebef6b6282e8513dcc2fad91cdd886c66
+  ZHHAnneKit: 931b2f99534d81134cbe99d03d0fc2b2c174a8c0
+  ZHHRootNavigationController: 5e0bb0d72d7423f1c4b3cfacfff1917f6dcf75bf
 
 PODFILE CHECKSUM: 377d3d964e6757014835007ac15a478de69bcebd
 

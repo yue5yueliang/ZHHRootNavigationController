@@ -21,12 +21,23 @@
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		703B6886DACE50F93FEFC4E9 /* Pods_ZHHRootNavigationController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 59A53A065029B7D25218105F /* Pods_ZHHRootNavigationController_Tests.framework */; };
-		7E3E99942DA104D400219802 /* ZHHHiddenStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E99932DA104D400219802 /* ZHHHiddenStatusViewController.m */; };
-		7E3E99972DA105F200219802 /* ZHHCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E99962DA105F200219802 /* ZHHCommonViewController.m */; };
 		7E3E99992DA106AE00219802 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E3E99982DA106AE00219802 /* Launch Screen.storyboard */; };
-		7E3E99A52DA10CA000219802 /* ZHHNormalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E99A42DA10CA000219802 /* ZHHNormalViewController.m */; };
-		7E3E99A82DA1118200219802 /* ZHHDisablePopGestureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E3E99A72DA1118200219802 /* ZHHDisablePopGestureController.m */; };
-		7EF3AF1E2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EF3AF1D2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.m */; };
+		7E620C3D2EA9FA5300FB7E9E /* ZHHToolbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C1C2EA9FA5300FB7E9E /* ZHHToolbarViewController.m */; };
+		7E620C3E2EA9FA5300FB7E9E /* ZHHFadeTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C302EA9FA5300FB7E9E /* ZHHFadeTransition.m */; };
+		7E620C3F2EA9FA5300FB7E9E /* ZHHGradientNavBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C1F2EA9FA5300FB7E9E /* ZHHGradientNavBarViewController.m */; };
+		7E620C402EA9FA5300FB7E9E /* ZHHScrollViewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C192EA9FA5300FB7E9E /* ZHHScrollViewViewController.m */; };
+		7E620C412EA9FA5300FB7E9E /* ZHHCustomNavBarTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C362EA9FA5300FB7E9E /* ZHHCustomNavBarTableViewController.m */; };
+		7E620C422EA9FA5300FB7E9E /* ZHHHiddenStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C2B2EA9FA5300FB7E9E /* ZHHHiddenStatusViewController.m */; };
+		7E620C432EA9FA5300FB7E9E /* ZHHCustomTransitionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C2E2EA9FA5300FB7E9E /* ZHHCustomTransitionViewController.m */; };
+		7E620C442EA9FA5300FB7E9E /* ZHHDisablePopGestureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C222EA9FA5300FB7E9E /* ZHHDisablePopGestureController.m */; };
+		7E620C452EA9FA5300FB7E9E /* ZHHHiddenNavigationBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C282EA9FA5300FB7E9E /* ZHHHiddenNavigationBarViewController.m */; };
+		7E620C462EA9FA5300FB7E9E /* ZHHNormalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C252EA9FA5300FB7E9E /* ZHHNormalViewController.m */; };
+		7E620C472EA9FA5300FB7E9E /* ZHHCommonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C3B2EA9FA5300FB7E9E /* ZHHCommonViewController.m */; };
+		7E620C482EA9FA5300FB7E9E /* ZHHPushAndRemoveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C332EA9FA5300FB7E9E /* ZHHPushAndRemoveViewController.m */; };
+		7E620C492EA9FA5300FB7E9E /* ZHHCustomNavigationBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C382EA9FA5300FB7E9E /* ZHHCustomNavigationBar.m */; };
+		7E620C4B2EA9FA6800FB7E9E /* 示例说明.md in Resources */ = {isa = PBXBuildFile; fileRef = 7E620C4A2EA9FA6800FB7E9E /* 示例说明.md */; };
+		7E620C502EAA0D9900FB7E9E /* ZHHFlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C4D2EAA0D9900FB7E9E /* ZHHFlipTransition.m */; };
+		7E620C512EAA0D9900FB7E9E /* ZHHScaleTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C4F2EAA0D9900FB7E9E /* ZHHScaleTransition.m */; };
 		9F2F19545D66038C9962990D /* Pods_ZHHRootNavigationController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA56FD8207124630E350C44 /* Pods_ZHHRootNavigationController_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -67,17 +78,38 @@
 		66C03C2F81BE5B2825D58665 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		699481E5FF5B713D23F94E70 /* Pods-ZHHRootNavigationController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZHHRootNavigationController_Tests.debug.xcconfig"; path = "Target Support Files/Pods-ZHHRootNavigationController_Tests/Pods-ZHHRootNavigationController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		74812BF248D8C5BEDEA0708F /* Pods-ZHHRootNavigationController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZHHRootNavigationController_Example.debug.xcconfig"; path = "Target Support Files/Pods-ZHHRootNavigationController_Example/Pods-ZHHRootNavigationController_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		7E3E99922DA104D400219802 /* ZHHHiddenStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHHiddenStatusViewController.h; sourceTree = "<group>"; };
-		7E3E99932DA104D400219802 /* ZHHHiddenStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHHiddenStatusViewController.m; sourceTree = "<group>"; };
-		7E3E99952DA105F200219802 /* ZHHCommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHCommonViewController.h; sourceTree = "<group>"; };
-		7E3E99962DA105F200219802 /* ZHHCommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHCommonViewController.m; sourceTree = "<group>"; };
 		7E3E99982DA106AE00219802 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		7E3E99A32DA10CA000219802 /* ZHHNormalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHNormalViewController.h; sourceTree = "<group>"; };
-		7E3E99A42DA10CA000219802 /* ZHHNormalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHNormalViewController.m; sourceTree = "<group>"; };
-		7E3E99A62DA1118200219802 /* ZHHDisablePopGestureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHDisablePopGestureController.h; sourceTree = "<group>"; };
-		7E3E99A72DA1118200219802 /* ZHHDisablePopGestureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHDisablePopGestureController.m; sourceTree = "<group>"; };
-		7EF3AF1C2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHPushAndRemoveViewController.h; sourceTree = "<group>"; };
-		7EF3AF1D2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHPushAndRemoveViewController.m; sourceTree = "<group>"; };
+		7E620C182EA9FA5300FB7E9E /* ZHHScrollViewViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHScrollViewViewController.h; sourceTree = "<group>"; };
+		7E620C192EA9FA5300FB7E9E /* ZHHScrollViewViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHScrollViewViewController.m; sourceTree = "<group>"; };
+		7E620C1B2EA9FA5300FB7E9E /* ZHHToolbarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHToolbarViewController.h; sourceTree = "<group>"; };
+		7E620C1C2EA9FA5300FB7E9E /* ZHHToolbarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHToolbarViewController.m; sourceTree = "<group>"; };
+		7E620C1E2EA9FA5300FB7E9E /* ZHHGradientNavBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHGradientNavBarViewController.h; sourceTree = "<group>"; };
+		7E620C1F2EA9FA5300FB7E9E /* ZHHGradientNavBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHGradientNavBarViewController.m; sourceTree = "<group>"; };
+		7E620C212EA9FA5300FB7E9E /* ZHHDisablePopGestureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHDisablePopGestureController.h; sourceTree = "<group>"; };
+		7E620C222EA9FA5300FB7E9E /* ZHHDisablePopGestureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHDisablePopGestureController.m; sourceTree = "<group>"; };
+		7E620C242EA9FA5300FB7E9E /* ZHHNormalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHNormalViewController.h; sourceTree = "<group>"; };
+		7E620C252EA9FA5300FB7E9E /* ZHHNormalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHNormalViewController.m; sourceTree = "<group>"; };
+		7E620C272EA9FA5300FB7E9E /* ZHHHiddenNavigationBarViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHHiddenNavigationBarViewController.h; sourceTree = "<group>"; };
+		7E620C282EA9FA5300FB7E9E /* ZHHHiddenNavigationBarViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHHiddenNavigationBarViewController.m; sourceTree = "<group>"; };
+		7E620C2A2EA9FA5300FB7E9E /* ZHHHiddenStatusViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHHiddenStatusViewController.h; sourceTree = "<group>"; };
+		7E620C2B2EA9FA5300FB7E9E /* ZHHHiddenStatusViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHHiddenStatusViewController.m; sourceTree = "<group>"; };
+		7E620C2D2EA9FA5300FB7E9E /* ZHHCustomTransitionViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHCustomTransitionViewController.h; sourceTree = "<group>"; };
+		7E620C2E2EA9FA5300FB7E9E /* ZHHCustomTransitionViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHCustomTransitionViewController.m; sourceTree = "<group>"; };
+		7E620C2F2EA9FA5300FB7E9E /* ZHHFadeTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHFadeTransition.h; sourceTree = "<group>"; };
+		7E620C302EA9FA5300FB7E9E /* ZHHFadeTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHFadeTransition.m; sourceTree = "<group>"; };
+		7E620C322EA9FA5300FB7E9E /* ZHHPushAndRemoveViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHPushAndRemoveViewController.h; sourceTree = "<group>"; };
+		7E620C332EA9FA5300FB7E9E /* ZHHPushAndRemoveViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHPushAndRemoveViewController.m; sourceTree = "<group>"; };
+		7E620C352EA9FA5300FB7E9E /* ZHHCustomNavBarTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHCustomNavBarTableViewController.h; sourceTree = "<group>"; };
+		7E620C362EA9FA5300FB7E9E /* ZHHCustomNavBarTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHCustomNavBarTableViewController.m; sourceTree = "<group>"; };
+		7E620C372EA9FA5300FB7E9E /* ZHHCustomNavigationBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHCustomNavigationBar.h; sourceTree = "<group>"; };
+		7E620C382EA9FA5300FB7E9E /* ZHHCustomNavigationBar.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHCustomNavigationBar.m; sourceTree = "<group>"; };
+		7E620C3A2EA9FA5300FB7E9E /* ZHHCommonViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHCommonViewController.h; sourceTree = "<group>"; };
+		7E620C3B2EA9FA5300FB7E9E /* ZHHCommonViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHCommonViewController.m; sourceTree = "<group>"; };
+		7E620C4A2EA9FA6800FB7E9E /* 示例说明.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = "示例说明.md"; sourceTree = "<group>"; };
+		7E620C4C2EAA0D9900FB7E9E /* ZHHFlipTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHFlipTransition.h; sourceTree = "<group>"; };
+		7E620C4D2EAA0D9900FB7E9E /* ZHHFlipTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHFlipTransition.m; sourceTree = "<group>"; };
+		7E620C4E2EAA0D9900FB7E9E /* ZHHScaleTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHScaleTransition.h; sourceTree = "<group>"; };
+		7E620C4F2EAA0D9900FB7E9E /* ZHHScaleTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHScaleTransition.m; sourceTree = "<group>"; };
 		8EA56FD8207124630E350C44 /* Pods_ZHHRootNavigationController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZHHRootNavigationController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C69EBFFE5C52C6AC81B85A70 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,7 +188,8 @@
 		6003F593195388D20070C39A /* Example for ZHHRootNavigationController */ = {
 			isa = PBXGroup;
 			children = (
-				7E3E99912DA1030900219802 /* Modules */,
+				7E620C4A2EA9FA6800FB7E9E /* 示例说明.md */,
+				7E620C3C2EA9FA5300FB7E9E /* Modules */,
 				6003F59C195388D20070C39A /* ZHHAppDelegate.h */,
 				6003F59D195388D20070C39A /* ZHHAppDelegate.m */,
 				6003F5A5195388D20070C39A /* ZHHViewController.h */,
@@ -209,93 +242,121 @@
 			name = "Podspec Metadata";
 			sourceTree = "<group>";
 		};
-		7E3E99912DA1030900219802 /* Modules */ = {
+		7E620C1A2EA9FA5300FB7E9E /* 包含 ScrollView */ = {
 			isa = PBXGroup;
 			children = (
-				7E3E99A22DA10AC500219802 /* 禁用侧滑返回 */,
-				7E3E99A12DA10ABE00219802 /* 普通导航栏 */,
-				7E3E99A02DA10AB400219802 /* 隐藏导航栏 */,
-				7E3E999F2DA10AA800219802 /* 包含 ScrollView */,
-				7E3E999E2DA10A9700219802 /* Push 并移除当前页面 */,
-				7E3E999D2DA10A8000219802 /* TableView 使用自定义导航栏类 */,
-				7E3E999C2DA10A7500219802 /* 自定义转场动画 */,
-				7E3E999B2DA10A6000219802 /* 带工具栏页面 */,
-				7E3E999A2DA10A4B00219802 /* 隐藏状态栏 */,
-				7E3E99952DA105F200219802 /* ZHHCommonViewController.h */,
-				7E3E99962DA105F200219802 /* ZHHCommonViewController.m */,
-			);
-			path = Modules;
-			sourceTree = "<group>";
-		};
-		7E3E999A2DA10A4B00219802 /* 隐藏状态栏 */ = {
-			isa = PBXGroup;
-			children = (
-				7E3E99922DA104D400219802 /* ZHHHiddenStatusViewController.h */,
-				7E3E99932DA104D400219802 /* ZHHHiddenStatusViewController.m */,
-			);
-			path = "隐藏状态栏";
-			sourceTree = "<group>";
-		};
-		7E3E999B2DA10A6000219802 /* 带工具栏页面 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "带工具栏页面";
-			sourceTree = "<group>";
-		};
-		7E3E999C2DA10A7500219802 /* 自定义转场动画 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "自定义转场动画";
-			sourceTree = "<group>";
-		};
-		7E3E999D2DA10A8000219802 /* TableView 使用自定义导航栏类 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "TableView 使用自定义导航栏类";
-			sourceTree = "<group>";
-		};
-		7E3E999E2DA10A9700219802 /* Push 并移除当前页面 */ = {
-			isa = PBXGroup;
-			children = (
-				7EF3AF1C2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.h */,
-				7EF3AF1D2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.m */,
-			);
-			path = "Push 并移除当前页面";
-			sourceTree = "<group>";
-		};
-		7E3E999F2DA10AA800219802 /* 包含 ScrollView */ = {
-			isa = PBXGroup;
-			children = (
+				7E620C182EA9FA5300FB7E9E /* ZHHScrollViewViewController.h */,
+				7E620C192EA9FA5300FB7E9E /* ZHHScrollViewViewController.m */,
 			);
 			path = "包含 ScrollView";
 			sourceTree = "<group>";
 		};
-		7E3E99A02DA10AB400219802 /* 隐藏导航栏 */ = {
+		7E620C1D2EA9FA5300FB7E9E /* 带工具栏页面 */ = {
 			isa = PBXGroup;
 			children = (
+				7E620C1B2EA9FA5300FB7E9E /* ZHHToolbarViewController.h */,
+				7E620C1C2EA9FA5300FB7E9E /* ZHHToolbarViewController.m */,
 			);
-			path = "隐藏导航栏";
+			path = "带工具栏页面";
 			sourceTree = "<group>";
 		};
-		7E3E99A12DA10ABE00219802 /* 普通导航栏 */ = {
+		7E620C202EA9FA5300FB7E9E /* 渐变导航栏 */ = {
 			isa = PBXGroup;
 			children = (
-				7E3E99A32DA10CA000219802 /* ZHHNormalViewController.h */,
-				7E3E99A42DA10CA000219802 /* ZHHNormalViewController.m */,
+				7E620C1E2EA9FA5300FB7E9E /* ZHHGradientNavBarViewController.h */,
+				7E620C1F2EA9FA5300FB7E9E /* ZHHGradientNavBarViewController.m */,
+			);
+			path = "渐变导航栏";
+			sourceTree = "<group>";
+		};
+		7E620C232EA9FA5300FB7E9E /* 禁用侧滑返回 */ = {
+			isa = PBXGroup;
+			children = (
+				7E620C212EA9FA5300FB7E9E /* ZHHDisablePopGestureController.h */,
+				7E620C222EA9FA5300FB7E9E /* ZHHDisablePopGestureController.m */,
+			);
+			path = "禁用侧滑返回";
+			sourceTree = "<group>";
+		};
+		7E620C262EA9FA5300FB7E9E /* 普通导航栏 */ = {
+			isa = PBXGroup;
+			children = (
+				7E620C242EA9FA5300FB7E9E /* ZHHNormalViewController.h */,
+				7E620C252EA9FA5300FB7E9E /* ZHHNormalViewController.m */,
 			);
 			path = "普通导航栏";
 			sourceTree = "<group>";
 		};
-		7E3E99A22DA10AC500219802 /* 禁用侧滑返回 */ = {
+		7E620C292EA9FA5300FB7E9E /* 隐藏导航栏 */ = {
 			isa = PBXGroup;
 			children = (
-				7E3E99A62DA1118200219802 /* ZHHDisablePopGestureController.h */,
-				7E3E99A72DA1118200219802 /* ZHHDisablePopGestureController.m */,
+				7E620C272EA9FA5300FB7E9E /* ZHHHiddenNavigationBarViewController.h */,
+				7E620C282EA9FA5300FB7E9E /* ZHHHiddenNavigationBarViewController.m */,
 			);
-			path = "禁用侧滑返回";
+			path = "隐藏导航栏";
+			sourceTree = "<group>";
+		};
+		7E620C2C2EA9FA5300FB7E9E /* 隐藏状态栏 */ = {
+			isa = PBXGroup;
+			children = (
+				7E620C2A2EA9FA5300FB7E9E /* ZHHHiddenStatusViewController.h */,
+				7E620C2B2EA9FA5300FB7E9E /* ZHHHiddenStatusViewController.m */,
+			);
+			path = "隐藏状态栏";
+			sourceTree = "<group>";
+		};
+		7E620C312EA9FA5300FB7E9E /* 自定义转场动画 */ = {
+			isa = PBXGroup;
+			children = (
+				7E620C2D2EA9FA5300FB7E9E /* ZHHCustomTransitionViewController.h */,
+				7E620C2E2EA9FA5300FB7E9E /* ZHHCustomTransitionViewController.m */,
+				7E620C2F2EA9FA5300FB7E9E /* ZHHFadeTransition.h */,
+				7E620C302EA9FA5300FB7E9E /* ZHHFadeTransition.m */,
+				7E620C4C2EAA0D9900FB7E9E /* ZHHFlipTransition.h */,
+				7E620C4D2EAA0D9900FB7E9E /* ZHHFlipTransition.m */,
+				7E620C4E2EAA0D9900FB7E9E /* ZHHScaleTransition.h */,
+				7E620C4F2EAA0D9900FB7E9E /* ZHHScaleTransition.m */,
+			);
+			path = "自定义转场动画";
+			sourceTree = "<group>";
+		};
+		7E620C342EA9FA5300FB7E9E /* Push 并移除当前页面 */ = {
+			isa = PBXGroup;
+			children = (
+				7E620C322EA9FA5300FB7E9E /* ZHHPushAndRemoveViewController.h */,
+				7E620C332EA9FA5300FB7E9E /* ZHHPushAndRemoveViewController.m */,
+			);
+			path = "Push 并移除当前页面";
+			sourceTree = "<group>";
+		};
+		7E620C392EA9FA5300FB7E9E /* TableView 使用自定义导航栏类 */ = {
+			isa = PBXGroup;
+			children = (
+				7E620C352EA9FA5300FB7E9E /* ZHHCustomNavBarTableViewController.h */,
+				7E620C362EA9FA5300FB7E9E /* ZHHCustomNavBarTableViewController.m */,
+				7E620C372EA9FA5300FB7E9E /* ZHHCustomNavigationBar.h */,
+				7E620C382EA9FA5300FB7E9E /* ZHHCustomNavigationBar.m */,
+			);
+			path = "TableView 使用自定义导航栏类";
+			sourceTree = "<group>";
+		};
+		7E620C3C2EA9FA5300FB7E9E /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				7E620C1A2EA9FA5300FB7E9E /* 包含 ScrollView */,
+				7E620C1D2EA9FA5300FB7E9E /* 带工具栏页面 */,
+				7E620C202EA9FA5300FB7E9E /* 渐变导航栏 */,
+				7E620C232EA9FA5300FB7E9E /* 禁用侧滑返回 */,
+				7E620C262EA9FA5300FB7E9E /* 普通导航栏 */,
+				7E620C292EA9FA5300FB7E9E /* 隐藏导航栏 */,
+				7E620C2C2EA9FA5300FB7E9E /* 隐藏状态栏 */,
+				7E620C312EA9FA5300FB7E9E /* 自定义转场动画 */,
+				7E620C342EA9FA5300FB7E9E /* Push 并移除当前页面 */,
+				7E620C392EA9FA5300FB7E9E /* TableView 使用自定义导航栏类 */,
+				7E620C3A2EA9FA5300FB7E9E /* ZHHCommonViewController.h */,
+				7E620C3B2EA9FA5300FB7E9E /* ZHHCommonViewController.m */,
+			);
+			path = Modules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -349,6 +410,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "桃色三岁";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = C7337H3ZTV;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -380,6 +444,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E3E99992DA106AE00219802 /* Launch Screen.storyboard in Resources */,
+				7E620C4B2EA9FA6800FB7E9E /* 示例说明.md in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 			);
@@ -469,14 +534,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E3E99A52DA10CA000219802 /* ZHHNormalViewController.m in Sources */,
 				6003F59E195388D20070C39A /* ZHHAppDelegate.m in Sources */,
-				7EF3AF1E2DA2E71D00559D42 /* ZHHPushAndRemoveViewController.m in Sources */,
-				7E3E99A82DA1118200219802 /* ZHHDisablePopGestureController.m in Sources */,
 				6003F5A7195388D20070C39A /* ZHHViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
-				7E3E99972DA105F200219802 /* ZHHCommonViewController.m in Sources */,
-				7E3E99942DA104D400219802 /* ZHHHiddenStatusViewController.m in Sources */,
+				7E620C3D2EA9FA5300FB7E9E /* ZHHToolbarViewController.m in Sources */,
+				7E620C3E2EA9FA5300FB7E9E /* ZHHFadeTransition.m in Sources */,
+				7E620C3F2EA9FA5300FB7E9E /* ZHHGradientNavBarViewController.m in Sources */,
+				7E620C402EA9FA5300FB7E9E /* ZHHScrollViewViewController.m in Sources */,
+				7E620C412EA9FA5300FB7E9E /* ZHHCustomNavBarTableViewController.m in Sources */,
+				7E620C422EA9FA5300FB7E9E /* ZHHHiddenStatusViewController.m in Sources */,
+				7E620C432EA9FA5300FB7E9E /* ZHHCustomTransitionViewController.m in Sources */,
+				7E620C442EA9FA5300FB7E9E /* ZHHDisablePopGestureController.m in Sources */,
+				7E620C452EA9FA5300FB7E9E /* ZHHHiddenNavigationBarViewController.m in Sources */,
+				7E620C462EA9FA5300FB7E9E /* ZHHNormalViewController.m in Sources */,
+				7E620C472EA9FA5300FB7E9E /* ZHHCommonViewController.m in Sources */,
+				7E620C502EAA0D9900FB7E9E /* ZHHFlipTransition.m in Sources */,
+				7E620C512EAA0D9900FB7E9E /* ZHHScaleTransition.m in Sources */,
+				7E620C482EA9FA5300FB7E9E /* ZHHPushAndRemoveViewController.m in Sources */,
+				7E620C492EA9FA5300FB7E9E /* ZHHCustomNavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +671,7 @@
 			baseConfigurationReference = 74812BF248D8C5BEDEA0708F /* Pods-ZHHRootNavigationController_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = C7337H3ZTV;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ZHHRootNavigationController/ZHHRootNavigationController-Prefix.pch";
 				INFOPLIST_FILE = "ZHHRootNavigationController/ZHHRootNavigationController-Info.plist";
@@ -614,6 +690,7 @@
 			baseConfigurationReference = 5BE42F05EE05A0280D6A20EF /* Pods-ZHHRootNavigationController_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = C7337H3ZTV;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ZHHRootNavigationController/ZHHRootNavigationController-Prefix.pch";
 				INFOPLIST_FILE = "ZHHRootNavigationController/ZHHRootNavigationController-Info.plist";

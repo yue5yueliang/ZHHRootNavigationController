@@ -11,6 +11,9 @@
 #import "UIViewController+ZHHRootNavigationController.h"
 #import "UINavigationController+ZHHInteractivePush.h"
 
+// 常量定义
+static const NSTimeInterval ZHHPushAnimationDuration = 0.35;  // 推送动画持续时间
+
 
 @interface NSArray<ObjectType> (ZHHRootNavigationController)
 
@@ -310,7 +313,7 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 /// 返回调试描述信息，包含类名、内存地址和内容控制器信息。
 /// @return 调试信息字符串
 - (NSString *)debugDescription {
-    return [NSString stringWithFormat:@"格式化并返回包含对象<%@: %p contentViewController: %@>", self.class, self, self.contentViewController];
+    return [NSString stringWithFormat:@"<%@: %p contentViewController: %@>", self.class, self, self.contentViewController];
 }
 
 - (void)viewDidLoad {
@@ -724,11 +727,13 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         if ([viewController respondsToSelector:@selector(zhh_customBackBarButtonItemWithTarget:action:)]) {
             viewController.navigationItem.leftBarButtonItem = [viewController zhh_customBackBarButtonItemWithTarget:self action:@selector(onBack:)];
         } else {
-            // 如果以上方法都没有实现，使用默认的返回按钮
-            viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"返回", nil)
-                                                                                               style:UIBarButtonItemStylePlain
-                                                                                              target:self
-                                                                                              action:@selector(onBack:)];
+            // 使用系统返回图标（SF Symbols）
+            UIImage *backImage = [UIImage systemImageNamed:@"chevron.left"];
+            UIBarButtonItem *backButtonItem = [[UIBarButtonItem alloc] initWithImage:backImage
+                                                                               style:UIBarButtonItemStylePlain
+                                                                              target:self
+                                                                              action:@selector(onBack:)];
+            viewController.navigationItem.leftBarButtonItem = backButtonItem;
         }
     }
 }
@@ -804,6 +809,7 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
     // 如果传入的 viewController 为 nil，则执行动画块（如果存在）并清空动画块
     if (viewController == nil) {
+        NSLog(@"⚠️ 尝试推入空的视图控制器");
         if (self.animationBlock) {
             self.animationBlock(YES);
             self.animationBlock = nil;
@@ -816,13 +822,20 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         // 获取当前栈中的最后一个视图控制器
         UIViewController *currentLast = ZHHSafeUnwrapViewController(self.viewControllers.lastObject);
         
-        // 推送新视图控制器，并设置导航栏的相关属性
-        [super pushViewController:ZHHSafeWrapViewController(viewController,
-                                                            viewController.zhh_navigationBarClass,
-                                                            self.useSystemBackBarButtonItem,
-                                                            currentLast.navigationItem.backBarButtonItem,
-                                                            currentLast.navigationItem.title ?: currentLast.title)
-                         animated:animated];
+        // 添加安全检查
+        if (currentLast) {
+            // 推送新视图控制器，并设置导航栏的相关属性
+            [super pushViewController:ZHHSafeWrapViewController(viewController,
+                                                                viewController.zhh_navigationBarClass,
+                                                                self.useSystemBackBarButtonItem,
+                                                                currentLast.navigationItem.backBarButtonItem,
+                                                                currentLast.navigationItem.title ?: currentLast.title)
+                             animated:animated];
+        } else {
+            // 如果当前控制器为nil，使用简单包装
+            NSLog(@"⚠️ 当前控制器为空，使用简单包装方式");
+            [super pushViewController:ZHHSafeWrapViewController(viewController, viewController.zhh_navigationBarClass) animated:animated];
+        }
     } else {
         [super pushViewController:ZHHSafeWrapViewController(viewController, viewController.zhh_navigationBarClass) animated:animated];
     }
@@ -933,14 +946,25 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 }
 
 - (void)removeViewController:(UIViewController *)controller animated:(BOOL)flag {
+    // 参数检查
+    if (!controller) {
+        NSLog(@"⚠️ 尝试移除空的视图控制器");
+        return;
+    }
+    
     // 复制当前视图控制器数组，确保对其进行操作时不会修改原数组
     NSMutableArray<__kindof UIViewController *> *controllers = [self.viewControllers mutableCopy];
+    
+    if (controllers.count == 0) {
+        NSLog(@"⚠️ 视图控制器数组为空");
+        return;
+    }
     
     __block UIViewController *controllerToRemove = nil;
     
     // 遍历视图控制器数组，查找要移除的视图控制器
     [controllers enumerateObjectsUsingBlock:^(__kindof UIViewController * obj, NSUInteger idx, BOOL * stop) {
-        // 使用 RTSafeUnwrapViewController 确保视图控制器是有效的
+        // 使用 ZHHSafeUnwrapViewController 确保视图控制器是有效的
         if (ZHHSafeUnwrapViewController(obj) == controller) {
             // 找到匹配的视图控制器
             controllerToRemove = obj;
@@ -954,38 +978,53 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
         
         // 使用更新后的视图控制器数组设置导航控制器的视图控制器，是否使用动画取决于 `flag` 参数
         [super setViewControllers:[NSArray arrayWithArray:controllers] animated:flag];
+    } else {
+        NSLog(@"⚠️ 在导航栈中未找到指定的视图控制器");
     }
 }
 
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated complete:(void (^)(BOOL))block {
+    // 参数检查
+    if (!viewController) {
+        NSLog(@"⚠️ 尝试推入空的视图控制器（带回调）");
+        if (block) {
+            block(NO);
+        }
+        return;
+    }
+    
     // 如果之前有动画块存在，则先执行它，并传递 NO 表示动画未完成
     if (self.animationBlock) {
         self.animationBlock(NO);
     }
     
     if (animated) {
-            // 系统自带动画
-            [self pushViewController:viewController animated:YES];
-        } else {
-            // 使用 fade 动画替代无动画情况
-            CATransition *transition = [CATransition animation];
-            transition.duration = 0.35;
-            transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-            transition.type = kCATransitionFade;
+        // 系统自带动画
+        [self pushViewController:viewController animated:YES];
+    } else {
+        // 使用 fade 动画替代无动画情况
+        CATransition *transition = [CATransition animation];
+        transition.duration = ZHHPushAnimationDuration;
+        transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+        transition.type = kCATransitionFade;
 
-            [self.view.layer addAnimation:transition forKey:nil];
+        [self.view.layer addAnimation:transition forKey:nil];
 
-            // 实际 push 不带动画，动画由 CATransition 接管
-            [self pushViewController:viewController animated:NO];
-        }
+        // 实际 push 不带动画，动画由 CATransition 接管
+        [self pushViewController:viewController animated:NO];
+    }
 
-        // 动画完成后触发 block
-        if (block) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.35 * NSEC_PER_SEC)),
-                           dispatch_get_main_queue(), ^{
+    // 动画完成后触发 block
+    if (block) {
+        __weak typeof(self) weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ZHHPushAnimationDuration * NSEC_PER_SEC)),
+                       dispatch_get_main_queue(), ^{
+            __strong typeof(weakSelf) strongSelf = weakSelf;
+            if (strongSelf) {
                 block(YES);
-            });
-        }
+            }
+        });
+    }
 }
 
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated complete:(void (^)(BOOL))block {

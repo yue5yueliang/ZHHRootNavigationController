@@ -10,6 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// 交互式推送手势速度阈值（点/秒）
+FOUNDATION_EXPORT const CGFloat ZHHInteractivePushVelocityThreshold;
+/// 交互式推送百分比阈值
+FOUNDATION_EXPORT const CGFloat ZHHInteractivePushPercentThreshold;
+/// 推送动画左侧视图偏移比例（相对于屏幕宽度）
+FOUNDATION_EXPORT const CGFloat ZHHInteractivePushLeftViewOffsetRatio;
+
 IB_DESIGNABLE
 @interface UINavigationController (ZHHInteractivePush)
 

@@ -37,7 +37,18 @@
     }
 
     // ✅ 4. 动画正在进行中，不响应返回
-    BOOL isTransitioning = [[self.navigationController valueForKey:@"_isTransitioning"] boolValue];
+    BOOL isTransitioning = NO;
+    @try {
+        // 使用私有API前先检查是否响应该key
+        if ([self.navigationController respondsToSelector:NSSelectorFromString(@"isTransitioning")]) {
+            isTransitioning = [[self.navigationController valueForKey:@"_isTransitioning"] boolValue];
+        }
+    } @catch (NSException *exception) {
+        // 如果访问失败，假设没有在转场中
+        NSLog(@"⚠️ 访问私有属性 _isTransitioning 失败: %@", exception);
+        isTransitioning = NO;
+    }
+    
     if (isTransitioning) {
         return NO;
     }
@@ -70,9 +81,17 @@ typedef void (^_ZHHViewControllerWillAppearInjectBlock)(UIViewController *viewCo
 @implementation UIViewController (ZHHFullscreenPopGesturePrivate)
 
 + (void)load {
-    Method originalMethod = class_getInstanceMethod(self, @selector(viewWillAppear:));
-    Method swizzledMethod = class_getInstanceMethod(self, @selector(zhh_viewWillAppear:));
-    method_exchangeImplementations(originalMethod, swizzledMethod);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        Method originalMethod = class_getInstanceMethod(self, @selector(viewWillAppear:));
+        Method swizzledMethod = class_getInstanceMethod(self, @selector(zhh_viewWillAppear:));
+        
+        if (originalMethod && swizzledMethod) {
+            method_exchangeImplementations(originalMethod, swizzledMethod);
+        } else {
+            NSLog(@"⚠️ 方法交换失败: viewWillAppear:");
+        }
+    });
 }
 
 - (void)zhh_viewWillAppear:(BOOL)animated {
@@ -97,10 +116,18 @@ typedef void (^_ZHHViewControllerWillAppearInjectBlock)(UIViewController *viewCo
 @implementation UINavigationController (ZHHFullscreenPopGesture)
 
 + (void)load {
-    // 注入 "-pushViewController:animated:"
-    Method originalMethod = class_getInstanceMethod(self, @selector(pushViewController:animated:));
-    Method swizzledMethod = class_getInstanceMethod(self, @selector(zhh_pushViewController:animated:));
-    method_exchangeImplementations(originalMethod, swizzledMethod);
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        // 注入 "-pushViewController:animated:"
+        Method originalMethod = class_getInstanceMethod(self, @selector(pushViewController:animated:));
+        Method swizzledMethod = class_getInstanceMethod(self, @selector(zhh_pushViewController:animated:));
+        
+        if (originalMethod && swizzledMethod) {
+            method_exchangeImplementations(originalMethod, swizzledMethod);
+        } else {
+            NSLog(@"⚠️ 方法交换失败: pushViewController:animated:");
+        }
+    });
 }
 
 - (void)zhh_pushViewController:(UIViewController *)viewController animated:(BOOL)animated {
@@ -109,15 +136,26 @@ typedef void (^_ZHHViewControllerWillAppearInjectBlock)(UIViewController *viewCo
         // 将自定义手势识别器添加到系统的屏幕边缘平移手势识别器所在的视图上。
         [self.interactivePopGestureRecognizer.view addGestureRecognizer:self.zhh_fullscreenPopGestureRecognizer];
 
-        // 将手势事件转发到系统内置手势识别器的私有处理方法。
-        NSArray *internalTargets = [self.interactivePopGestureRecognizer valueForKey:@"targets"];
-        id internalTarget = [internalTargets.firstObject valueForKey:@"target"];
-        SEL internalAction = NSSelectorFromString(@"handleNavigationTransition:");
-        self.zhh_fullscreenPopGestureRecognizer.delegate = self.zhh_popGestureRecognizerDelegate;
-        [self.zhh_fullscreenPopGestureRecognizer addTarget:internalTarget action:internalAction];
-
-        // 禁用系统内置的手势识别器。
-        self.interactivePopGestureRecognizer.enabled = NO;
+        // 将手势事件转发到系统内置手势识别器的私有处理方法
+        @try {
+            NSArray *internalTargets = [self.interactivePopGestureRecognizer valueForKey:@"targets"];
+            if (internalTargets.count > 0) {
+                id internalTarget = [internalTargets.firstObject valueForKey:@"target"];
+                SEL internalAction = NSSelectorFromString(@"handleNavigationTransition:");
+                
+                if (internalTarget && [internalTarget respondsToSelector:internalAction]) {
+                    self.zhh_fullscreenPopGestureRecognizer.delegate = self.zhh_popGestureRecognizerDelegate;
+                    [self.zhh_fullscreenPopGestureRecognizer addTarget:internalTarget action:internalAction];
+                    
+                    // 禁用系统内置的手势识别器。
+                    self.interactivePopGestureRecognizer.enabled = NO;
+                } else {
+                    NSLog(@"⚠️ 全屏返回手势设置失败 - target 或 action 不可用");
+                }
+            }
+        } @catch (NSException *exception) {
+            NSLog(@"⚠️ 全屏返回手势设置失败: %@", exception);
+        }
     }
     
     // 处理首选的导航栏外观。

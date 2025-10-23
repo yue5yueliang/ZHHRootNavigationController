@@ -49,47 +49,53 @@
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // TODO: 添加点击跳转逻辑
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     switch (indexPath.item) {
         case 0:
             /// 禁用侧滑返回
-            [self zhh_pushViewControllerWithClassName:@"ZHHDisablePopGestureController" title:@""];
+            [self zhh_pushViewControllerWithClassName:@"ZHHDisablePopGestureController" title:@"禁用侧滑返回"];
             break;
         case 1:
             /// 普通导航栏
-            [self zhh_pushViewControllerWithClassName:@"ZHHNormalViewController" title:@""];
+            [self zhh_pushViewControllerWithClassName:@"ZHHNormalViewController" title:@"普通导航栏"];
             break;
         case 2:
             /// 隐藏导航栏
+            [self zhh_pushViewControllerWithClassName:@"ZHHHiddenNavigationBarViewController" title:@"隐藏导航栏"];
             break;
         case 3:
             /// 包含 ScrollView
+            [self zhh_pushViewControllerWithClassName:@"ZHHScrollViewViewController" title:@"ScrollView 联动"];
             break;
         case 4:
             /// Push 并移除当前页面
             [self zhh_pushViewControllerWithClassName:@"ZHHPushAndRemoveViewController" title:@"Push 并移除当前页面"];
-
             break;
         case 5:
             /// TableView 使用自定义导航栏类
+            [self zhh_pushViewControllerWithClassName:@"ZHHCustomNavBarTableViewController" title:@"自定义导航栏类"];
             break;
         case 6:
             /// 自定义转场动画
+            [self zhh_pushViewControllerWithClassName:@"ZHHCustomTransitionViewController" title:@"自定义转场动画"];
             break;
         case 7:
             /// 带工具栏页面
+            [self zhh_pushViewControllerWithClassName:@"ZHHToolbarViewController" title:@"带工具栏页面"];
             break;
         case 8:
             /// 隐藏状态栏
             [self zhh_pushViewControllerWithClassName:@"ZHHHiddenStatusViewController" title:@"隐藏状态栏"];
             break;
+        case 9:
+            /// 渐变导航栏
+            [self zhh_pushViewControllerWithClassName:@"ZHHGradientNavBarViewController" title:@"渐变导航栏"];
+            break;
             
         default:
             break;
     }
-    
 }
 
 #pragma mark - Getter
@@ -123,15 +129,16 @@
 - (NSArray *)dataSource {
     if (!_dataSource) {
         _dataSource = @[
-            @"禁用侧滑返回",
-            @"普通导航栏",
-            @"隐藏导航栏",
-            @"包含 ScrollView",
-            @"Push 并移除当前页面",
-            @"TableView 使用自定义导航栏类",
-            @"自定义转场动画",
-            @"带工具栏页面",
-            @"隐藏状态栏"
+            @"📵 禁用侧滑返回",
+            @"📱 普通导航栏",
+            @"🔍 隐藏导航栏",
+            @"📜 包含 ScrollView",
+            @"🚀 Push 并移除当前页面",
+            @"💫 TableView 使用自定义导航栏类",
+            @"🎬 自定义转场动画",
+            @"🛠 带工具栏页面",
+            @"👁 隐藏状态栏",
+            @"🎨 渐变导航栏"
         ];
     }
     return _dataSource;
