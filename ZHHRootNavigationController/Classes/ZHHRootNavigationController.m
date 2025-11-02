@@ -432,7 +432,14 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 /// 返回 `contentViewController` 的下一个兄弟视图控制器。
 /// @return `contentViewController` 的下一个兄弟视图控制器。如果没有下一个兄弟视图控制器，则返回 nil。
 - (__kindof UIViewController * _Nullable)zhh_nextPushViewController {
-    return self.contentViewController.zhh_nextPushViewController;
+    if ([self.contentViewController respondsToSelector:@selector(zhh_nextPushViewController)]) {
+        SEL selector = NSSelectorFromString(@"zhh_nextPushViewController");
+        #pragma clang diagnostic push
+        #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        return [self.contentViewController performSelector:selector];
+        #pragma clang diagnostic pop
+    }
+    return nil;
 }
 
 @end

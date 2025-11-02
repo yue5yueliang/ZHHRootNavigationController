@@ -7,6 +7,7 @@
 //
 
 #import "ZHHViewController.h"
+#import "ZHHNormalViewController.h"
 
 @interface ZHHViewController () <UITableViewDelegate,UITableViewDataSource>
 /// 自带全屏tableView,子类可以重新布局其frame
@@ -22,13 +23,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    self.title = @"Root";
+    self.title = @"首页";
+    
+    // 启用交互式推送（从右侧边缘左滑可触发 push）
+    __weak typeof(self) weakSelf = self;
+    [self.navigationController zhh_enableInteractivePushWithHandler:^UIViewController * _Nonnull{
+        // 返回下一个页面实例
+        return [[ZHHNormalViewController alloc] init];
+    }];
     
     [self.view addSubview:self.mainTableView];
     [self.mainTableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
 }
+
 
 #pragma mark - UITableViewDataSource
 

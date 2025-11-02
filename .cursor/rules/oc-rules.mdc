@@ -1,0 +1,84 @@
+---
+alwaysApply: true
+---
+
+# Objective-C 编码规范
+
+## 命名约定
+
+- **类名和 Category 名**：使用大驼峰命名（PascalCase），如 `ZHHRootNavigationController`、`UINavigationController+ZHHInteractivePush`
+- **方法名**：使用小驼峰命名（camelCase），项目特定方法使用 `zhh_` 前缀，如 `zhh_setupInteractivePush`、`zhh_nextPushViewController`
+- **常量**：使用大驼峰命名，项目特定常量使用 `ZHH` 前缀，如 `ZHHInteractivePushVelocityThreshold`
+- **私有方法**：使用下划线前缀，如 `_setTransitionDelegate:`、`_installsLeftBarButtonItemIfNeededForViewController:`
+
+## 代码组织
+
+- **文件头部**：必须包含文件注释（文件名、项目名、作者、版权信息）
+- **导入顺序**：`<系统框架>` → `"项目头文件"`，使用 `#import` 而非 `@import`
+- **Category 接口**：在 `.m` 文件中使用匿名 Category 声明私有属性和方法
+- **方法分组**：使用 `#pragma mark - SectionName` 组织代码
+
+## Runtime 使用规范
+
+- **Associated Objects**：
+  - 使用 `objc_setAssociatedObject` 和 `objc_getAssociatedObject`
+  - 选择合适的关联策略：`OBJC_ASSOCIATION_RETAIN_NONATOMIC`（强引用）、`OBJC_ASSOCIATION_ASSIGN`（弱引用）
+  - 使用 `@selector()` 作为 key，避免字符串常量
+
+- **Method Swizzling**：
+  - 仅在必要时使用，优先考虑继承或组合
+  - 使用静态函数封装，如 `zhh_swizzle_selector()`
+  - 确保方法交换的线程安全
+
+- **直接访问 ivar**：
+  - 仅在必要时使用 `class_getInstanceVariable` 和 `object_setIvar`
+  - 优先使用公开的 API
+
+## 内存管理
+
+- **Delegate 属性**：使用 `weak` 修饰，避免循环引用
+- **Block 属性**：使用 `copy` 修饰
+- **Associated Objects**：注意生命周期，对象销毁时清理关联对象
+- **避免循环引用**：在 Block 中使用 `__weak` 和 `__strong` 修饰符
+
+## 协议和 Delegate 模式
+
+- **Delegate 转发**：使用 `forwardingTargetForSelector:` 和 `respondsToSelector:` 实现代理链
+- **原始 Delegate 保存**：需要临时替换 delegate 时，保存原始 delegate 并在适当时机恢复
+- **协议方法实现**：明确标注协议实现，如 `<UINavigationControllerDelegate>`
+
+## Category 扩展
+
+- **命名空间**：使用项目前缀（`zhh_`）避免命名冲突
+- **方法实现**：在 Category 中实现方法，保持代码模块化
+- **关联对象**：Category 中添加的属性通过 Associated Objects 实现
+
+## 注释规范
+
+- **方法注释**：使用 `/** */` 格式，包含方法描述、参数说明（`@param`）、返回值说明（`@return`）
+- **类注释**：使用 `/** */` 格式，说明类的用途和注意事项
+- **代码注释**：关键逻辑使用 `//` 单行注释说明
+
+## 错误处理
+
+- **日志输出**：使用 `NSLog` 记录关键信息和错误，格式统一（如 `📱 [Interactive Push] 信息内容`）
+- **空值检查**：在使用对象前检查是否为 `nil`
+- **优雅降级**：提供备用方案，如无法获取 ivar 时使用普通方式
+
+## 常量和配置
+
+- **常量定义**：在文件顶部使用 `const` 定义常量
+- **静态常量**：使用 `static const` 定义文件内私有常量
+- **配置值**：使用有意义的名字和注释说明用途
+
+## 手势和交互
+
+- **手势识别器**：合理设置优先级（`requireGestureRecognizerToFail:`）
+- **手势状态处理**：完整处理所有状态（`Began`、`Changed`、`Ended`、`Cancelled`）
+- **坐标转换**：注意不同视图坐标系之间的转换
+
+## 动画和转场
+
+- **交互式转场**：正确实现 `UIViewControllerInteractiveTransitioning` 和 `UIViewControllerAnimatedTransitioning`
+- **进度更新**：实时更新转场进度，跟随用户手势
+- **完成判断**：基于速度和进度阈值判断转场完成或取消

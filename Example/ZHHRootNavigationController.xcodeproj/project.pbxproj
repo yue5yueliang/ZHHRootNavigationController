@@ -38,6 +38,9 @@
 		7E620C4B2EA9FA6800FB7E9E /* 示例说明.md in Resources */ = {isa = PBXBuildFile; fileRef = 7E620C4A2EA9FA6800FB7E9E /* 示例说明.md */; };
 		7E620C502EAA0D9900FB7E9E /* ZHHFlipTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C4D2EAA0D9900FB7E9E /* ZHHFlipTransition.m */; };
 		7E620C512EAA0D9900FB7E9E /* ZHHScaleTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C4F2EAA0D9900FB7E9E /* ZHHScaleTransition.m */; };
+		7E620C552EAA632C00FB7E9E /* ZHHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C532EAA632C00FB7E9E /* ZHHTabBarController.m */; };
+		7E620C582EAA661B00FB7E9E /* ZHHDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C572EAA661B00FB7E9E /* ZHHDiscoverViewController.m */; };
+		7E620C5B2EAA68CD00FB7E9E /* ZHHSceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C5A2EAA68CD00FB7E9E /* ZHHSceneDelegate.m */; };
 		9F2F19545D66038C9962990D /* Pods_ZHHRootNavigationController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA56FD8207124630E350C44 /* Pods_ZHHRootNavigationController_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +113,12 @@
 		7E620C4D2EAA0D9900FB7E9E /* ZHHFlipTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHFlipTransition.m; sourceTree = "<group>"; };
 		7E620C4E2EAA0D9900FB7E9E /* ZHHScaleTransition.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHScaleTransition.h; sourceTree = "<group>"; };
 		7E620C4F2EAA0D9900FB7E9E /* ZHHScaleTransition.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHScaleTransition.m; sourceTree = "<group>"; };
+		7E620C522EAA632C00FB7E9E /* ZHHTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHTabBarController.h; sourceTree = "<group>"; };
+		7E620C532EAA632C00FB7E9E /* ZHHTabBarController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHTabBarController.m; sourceTree = "<group>"; };
+		7E620C562EAA661B00FB7E9E /* ZHHDiscoverViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHDiscoverViewController.h; sourceTree = "<group>"; };
+		7E620C572EAA661B00FB7E9E /* ZHHDiscoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHDiscoverViewController.m; sourceTree = "<group>"; };
+		7E620C592EAA68CD00FB7E9E /* ZHHSceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHSceneDelegate.h; sourceTree = "<group>"; };
+		7E620C5A2EAA68CD00FB7E9E /* ZHHSceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHSceneDelegate.m; sourceTree = "<group>"; };
 		8EA56FD8207124630E350C44 /* Pods_ZHHRootNavigationController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZHHRootNavigationController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C69EBFFE5C52C6AC81B85A70 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -190,12 +199,15 @@
 			children = (
 				7E620C4A2EA9FA6800FB7E9E /* 示例说明.md */,
 				7E620C3C2EA9FA5300FB7E9E /* Modules */,
+				7E620C542EAA632C00FB7E9E /* TabBarController */,
 				6003F59C195388D20070C39A /* ZHHAppDelegate.h */,
 				6003F59D195388D20070C39A /* ZHHAppDelegate.m */,
+				7E620C592EAA68CD00FB7E9E /* ZHHSceneDelegate.h */,
+				7E620C5A2EAA68CD00FB7E9E /* ZHHSceneDelegate.m */,
 				6003F5A5195388D20070C39A /* ZHHViewController.h */,
 				6003F5A6195388D20070C39A /* ZHHViewController.m */,
-				7E3E99982DA106AE00219802 /* Launch Screen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
+				7E3E99982DA106AE00219802 /* Launch Screen.storyboard */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
 			name = "Example for ZHHRootNavigationController";
@@ -357,6 +369,17 @@
 				7E620C3B2EA9FA5300FB7E9E /* ZHHCommonViewController.m */,
 			);
 			path = Modules;
+			sourceTree = "<group>";
+		};
+		7E620C542EAA632C00FB7E9E /* TabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				7E620C562EAA661B00FB7E9E /* ZHHDiscoverViewController.h */,
+				7E620C572EAA661B00FB7E9E /* ZHHDiscoverViewController.m */,
+				7E620C522EAA632C00FB7E9E /* ZHHTabBarController.h */,
+				7E620C532EAA632C00FB7E9E /* ZHHTabBarController.m */,
+			);
+			path = TabBarController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -536,15 +559,18 @@
 			files = (
 				6003F59E195388D20070C39A /* ZHHAppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* ZHHViewController.m in Sources */,
+				7E620C582EAA661B00FB7E9E /* ZHHDiscoverViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				7E620C3D2EA9FA5300FB7E9E /* ZHHToolbarViewController.m in Sources */,
 				7E620C3E2EA9FA5300FB7E9E /* ZHHFadeTransition.m in Sources */,
+				7E620C552EAA632C00FB7E9E /* ZHHTabBarController.m in Sources */,
 				7E620C3F2EA9FA5300FB7E9E /* ZHHGradientNavBarViewController.m in Sources */,
 				7E620C402EA9FA5300FB7E9E /* ZHHScrollViewViewController.m in Sources */,
 				7E620C412EA9FA5300FB7E9E /* ZHHCustomNavBarTableViewController.m in Sources */,
 				7E620C422EA9FA5300FB7E9E /* ZHHHiddenStatusViewController.m in Sources */,
 				7E620C432EA9FA5300FB7E9E /* ZHHCustomTransitionViewController.m in Sources */,
 				7E620C442EA9FA5300FB7E9E /* ZHHDisablePopGestureController.m in Sources */,
+				7E620C5B2EAA68CD00FB7E9E /* ZHHSceneDelegate.m in Sources */,
 				7E620C452EA9FA5300FB7E9E /* ZHHHiddenNavigationBarViewController.m in Sources */,
 				7E620C462EA9FA5300FB7E9E /* ZHHNormalViewController.m in Sources */,
 				7E620C472EA9FA5300FB7E9E /* ZHHCommonViewController.m in Sources */,
