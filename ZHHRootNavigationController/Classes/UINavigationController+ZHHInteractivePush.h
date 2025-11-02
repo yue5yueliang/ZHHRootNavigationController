@@ -10,30 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// 交互式推送手势速度阈值（点/秒）
-FOUNDATION_EXPORT const CGFloat ZHHInteractivePushVelocityThreshold;
-/// 交互式推送百分比阈值
-FOUNDATION_EXPORT const CGFloat ZHHInteractivePushPercentThreshold;
-/// 推送动画左侧视图偏移比例（相对于屏幕宽度）
-FOUNDATION_EXPORT const CGFloat ZHHInteractivePushLeftViewOffsetRatio;
-
-IB_DESIGNABLE
+/// UINavigationController 分类 —— 支持「左滑 Push」手势
 @interface UINavigationController (ZHHInteractivePush)
 
-// 使用 IBInspectable 可以在 Interface Builder 中修改这些属性
-@property (nonatomic, assign, getter=zhh_isInteractivePushEnabled) IBInspectable BOOL zhh_enableInteractivePush;
-
-/// 获取用于交互式推送的手势识别器。
-/// @return 返回一个 `UIPanGestureRecognizer` 实例，或者 `nil` 如果手势识别器尚未创建。
-@property (nonatomic, readonly, nullable) UIPanGestureRecognizer *zhh_interactivePushGestureRecognizer;
-
-@end
-
-@interface UIViewController (ZHHInteractivePush)
-
-/// 获取当前控制器在导航栈中的下一个 push 进来的控制器。
-/// @return 若存在下一个控制器，则返回该控制器；否则返回 `nil`。
-- (nullable __kindof UIViewController *)zhh_nextPushViewController;
+/// 启用左滑手势 push（目标控制器工厂方法）
+- (void)zhh_enableInteractivePushWithHandler:(UIViewController * _Nonnull (^)(void))handler;
 
 @end
 
