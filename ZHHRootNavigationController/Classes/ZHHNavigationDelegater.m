@@ -100,6 +100,13 @@
         transitioning = pushTransition;
     }
     
+    // 对于 pop 操作，也使用自定义转场动画（镜像 push 效果）
+    if (!transitioning && operation == UINavigationControllerOperationPop) {
+        ZHHNavigationPushTransition *popTransition = [[ZHHNavigationPushTransition alloc] init];
+        popTransition.isPush = NO;
+        transitioning = popTransition;
+    }
+    
     return transitioning;
 }
 

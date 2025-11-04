@@ -10,6 +10,7 @@
 #import "UINavigationController+ZHHInteractivePush.h"
 #import "ZHHNavigationDelegater.h"
 #import "ZHHNavigationPushTransition.h"
+#import "ZHHInteractivePushTransition.h"
 #import <objc/runtime.h>
 
 @interface UINavigationController () <UIGestureRecognizerDelegate>
@@ -146,8 +147,8 @@
             // 优化：只有当滑动超过阈值（1%）时才触发 push，避免轻轻一滑就触发
             static const CGFloat kPushThreshold = 0.01; // 滑动屏幕宽度的 1% 才触发
             if (!self.zhh_interactiveTransition && progress > kPushThreshold && nextVC) {
-                // 创建交互式转场对象
-                self.zhh_interactiveTransition = [[UIPercentDrivenInteractiveTransition alloc] init];
+                // 创建自定义交互式转场对象（提供更自然的动画）
+                self.zhh_interactiveTransition = [[ZHHInteractivePushTransition alloc] init];
                 
                 // 创建自定义代理并关联交互式转场
                 self.zhh_navigationDelegater = [ZHHNavigationDelegater delegaterWithNavigationController:self];
@@ -193,7 +194,9 @@
             progress = MAX(0, MIN(1, progress));
             
             // 根据滑动速度和进度决定完成还是取消
-            if (velocity.x < -200 || progress > 0.5) {
+            // 优化：使用 1/3 的阈值，让用户更容易完成 push 操作
+            static const CGFloat kPushCompletionThreshold = 1.0 / 3.0; // 约 33%
+            if (velocity.x < -200 || progress > kPushCompletionThreshold) {
                 [self.zhh_interactiveTransition finishInteractiveTransition];
             } else {
                 [self.zhh_interactiveTransition cancelInteractiveTransition];
