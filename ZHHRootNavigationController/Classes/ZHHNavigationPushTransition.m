@@ -211,7 +211,7 @@
     } completion:^(BOOL finished) {
         if ([transitionContext transitionWasCancelled]) {
             // 转场被取消：完全恢复 fromVC.view 的初始状态
-            NSLog(@"📱 [Push Transition] 转场被取消，恢复 fromVC.view 状态");
+            // NSLog(@"📱 [Push Transition] 转场被取消，恢复 fromVC.view 状态");
             
             // 1. 恢复 transform 和 layer transform
             fromVC.view.transform = initialFromVCTransform;
@@ -266,7 +266,7 @@
                 [backgroundSnapshot removeFromSuperview];
             }
             
-            NSLog(@"📱 [Push Transition] fromVC.view 状态已恢复：frame=%@, transform=%@, superview=%@", 
+            // NSLog(@"📱 [Push Transition] fromVC.view 状态已恢复：frame=%@, transform=%@, superview=%@", 
                   NSStringFromCGRect(fromVC.view.frame),
                   NSStringFromCGAffineTransform(fromVC.view.transform),
                   fromVC.view.superview);

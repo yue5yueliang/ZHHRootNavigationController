@@ -65,14 +65,14 @@
     
     switch (gesture.state) {
         case UIGestureRecognizerStateBegan: {
-            NSLog(@"📱 [Interactive Push] ========== 手势开始 ==========");
-            NSLog(@"📱 [Interactive Push] translation: (%.0f, %.0f)", translation.x, translation.y);
+            // NSLog(@"📱 [Interactive Push] ========== 手势开始 ==========");
+            // NSLog(@"📱 [Interactive Push] translation: (%.0f, %.0f)", translation.x, translation.y);
             
             // 再次确认是左滑（如果已经有明显移动）
             // 如果刚接触，translation 可能为 0，也允许进入（等待 Changed 阶段判断）
             if (fabs(translation.x) > 5 && translation.x >= 0) {
                 // 已经有明显的右滑，直接返回
-                NSLog(@"📱 [Interactive Push] ❌ 明显的右滑，拒绝");
+                // NSLog(@"📱 [Interactive Push] ❌ 明显的右滑，拒绝");
                 return;
             }
             
@@ -88,14 +88,14 @@
                         scrollView.scrollEnabled = NO;
                         // 保存 ScrollView 引用，在手势结束时恢复
                         objc_setAssociatedObject(self, @"zhh_disabledScrollView", scrollView, OBJC_ASSOCIATION_ASSIGN);
-                        NSLog(@"📱 [Interactive Push] 临时禁用 ScrollView 滚动");
+                        // NSLog(@"📱 [Interactive Push] 临时禁用 ScrollView 滚动");
                     }
                     break;
                 }
                 scrollViewParent = scrollViewParent.superview;
             }
             
-            NSLog(@"📱 [Interactive Push] ✅ 确认是左滑或刚接触，继续处理");
+            // NSLog(@"📱 [Interactive Push] ✅ 确认是左滑或刚接触，继续处理");
             
             // 获取下一个要 push 的控制器
             // 优先从 handler 获取，如果没有 handler，尝试从 topViewController 获取
@@ -183,7 +183,7 @@
             if (disabledScrollView) {
                 disabledScrollView.scrollEnabled = YES;
                 objc_setAssociatedObject(self, @"zhh_disabledScrollView", nil, OBJC_ASSOCIATION_ASSIGN);
-                NSLog(@"📱 [Interactive Push] 恢复 ScrollView 滚动");
+                // NSLog(@"📱 [Interactive Push] 恢复 ScrollView 滚动");
             }
             
             // 如果没有交互式转场对象（说明还没有 push），直接清理并返回
@@ -203,7 +203,7 @@
             
             // 根据滑动速度和进度决定完成还是取消
             // 优化：使用 1/3 的阈值，让用户更容易完成 push 操作
-            static const CGFloat kPushCompletionThreshold = 1.0 / 3.0; // 约 33%
+            static const CGFloat kPushCompletionThreshold = 1.0 / 5.0; // 约 33%
             if (velocity.x < -200 || progress > kPushCompletionThreshold) {
                 [self.zhh_interactiveTransition finishInteractiveTransition];
             } else {
@@ -238,11 +238,11 @@
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
     if (gestureRecognizer != self.zhh_pushPanGesture) return YES;
     
-    NSLog(@"📱 [Interactive Push] gestureRecognizerShouldBegin 被调用");
+    // NSLog(@"📱 [Interactive Push] gestureRecognizerShouldBegin 被调用");
     
     // 如果已有交互式转场进行中，禁止新手势
     if (self.zhh_interactiveTransition) {
-        NSLog(@"📱 [Interactive Push] ❌ 已有转场进行中，拒绝手势");
+        // NSLog(@"📱 [Interactive Push] ❌ 已有转场进行中，拒绝手势");
         return NO;
     }
     
@@ -250,17 +250,17 @@
     BOOL hasNextVC = NO;
     if (self.zhh_nextPushViewControllerHandler) {
         hasNextVC = YES;
-        NSLog(@"📱 [Interactive Push] ✅ 找到 handler");
+        // NSLog(@"📱 [Interactive Push] ✅ 找到 handler");
     } else if (self.topViewController) {
         SEL selector = NSSelectorFromString(@"zhh_nextPushViewController");
         hasNextVC = [self.topViewController respondsToSelector:selector];
-        NSLog(@"📱 [Interactive Push] %@ topViewController 是否有 zhh_nextPushViewController", hasNextVC ? @"✅" : @"❌");
+        // NSLog(@"📱 [Interactive Push] %@ topViewController 是否有 zhh_nextPushViewController", hasNextVC ? @"✅" : @"❌");
     } else {
-        NSLog(@"📱 [Interactive Push] ❌ 没有 handler 且 topViewController 为 nil");
+        // NSLog(@"📱 [Interactive Push] ❌ 没有 handler 且 topViewController 为 nil");
     }
     
     if (!hasNextVC) {
-        NSLog(@"📱 [Interactive Push] ❌ 无法获取下一个控制器，拒绝手势");
+        // NSLog(@"📱 [Interactive Push] ❌ 无法获取下一个控制器，拒绝手势");
         return NO;
     }
     
@@ -282,27 +282,27 @@
         scrollViewParent = scrollViewParent.superview;
     }
     
-    NSLog(@"📱 [Interactive Push] translation: (%.0f, %.0f), velocity: (%.0f, %.0f), 在ScrollView上: %d", 
+    // NSLog(@"📱 [Interactive Push] translation: (%.0f, %.0f), velocity: (%.0f, %.0f), 在ScrollView上: %d", 
           translation.x, translation.y, velocity.x, velocity.y, isOnScrollView);
     
     // 如果已经在 ScrollView 上，需要更严格的水平滑动判断
     if (isOnScrollView) {
         // 如果刚接触（translation 很小），暂时允许（等待 Began 阶段判断）
         if (fabs(translation.x) < 5 && fabs(translation.y) < 5 && fabs(velocity.x) < 100) {
-            NSLog(@"📱 [Interactive Push] 在ScrollView上刚接触，暂时允许");
+            // NSLog(@"📱 [Interactive Push] 在ScrollView上刚接触，暂时允许");
             return YES;
         }
         
         // 需要明显的水平左滑（水平方向移动明显大于垂直方向）
         if (fabs(translation.x) > 10 && fabs(translation.x) > fabs(translation.y) * 1.5 && translation.x < 0) {
             // 明显的水平左滑，允许 push 手势
-            NSLog(@"📱 [Interactive Push] 在ScrollView上检测到明显水平左滑 ✅");
+            // NSLog(@"📱 [Interactive Push] 在ScrollView上检测到明显水平左滑 ✅");
             return YES;
         }
         
         // 如果是垂直滑动或水平移动不明显，拒绝（让 ScrollView 处理）
         if (fabs(translation.y) > fabs(translation.x) * 1.5 || (fabs(translation.x) < 10 && fabs(velocity.x) < 200)) {
-            NSLog(@"📱 [Interactive Push] 在ScrollView上主要是垂直滑动或水平移动不明显，拒绝");
+            // NSLog(@"📱 [Interactive Push] 在ScrollView上主要是垂直滑动或水平移动不明显，拒绝");
             return NO;
         }
     }
@@ -312,12 +312,12 @@
     if (fabs(translation.x) > 5 || fabs(velocity.x) > 100) {
         // 有明显的移动，检查方向
         BOOL isLeftSwipe = translation.x < 0 || velocity.x < 0;
-        NSLog(@"📱 [Interactive Push] 有明显移动，方向：%@", isLeftSwipe ? @"左滑 ✅" : @"右滑 ❌");
+        // NSLog(@"📱 [Interactive Push] 有明显移动，方向：%@", isLeftSwipe ? @"左滑 ✅" : @"右滑 ❌");
         return isLeftSwipe;
     }
     
     // 刚接触屏幕，暂时允许（在 Began 阶段会再次检查）
-    NSLog(@"📱 [Interactive Push] 刚接触屏幕，暂时允许（待 Began 阶段判断）");
+    // NSLog(@"📱 [Interactive Push] 刚接触屏幕，暂时允许（待 Began 阶段判断）");
     return YES;
 }
 
@@ -356,7 +356,7 @@
         
         // 如果是明显的水平左滑，不允许同时识别（让我们的手势优先）
         if (fabs(translation.x) > 10 && fabs(translation.x) > fabs(translation.y) * 1.5 && translation.x < 0) {
-            NSLog(@"📱 [Interactive Push] 明显水平左滑，不让 ScrollView 同时识别");
+            // NSLog(@"📱 [Interactive Push] 明显水平左滑，不让 ScrollView 同时识别");
             return NO; // 不让 ScrollView 识别，优先处理 push
         }
         
@@ -400,7 +400,7 @@
             
             // 如果是明显的水平左滑，要求 ScrollView 手势失败
             if (fabs(translation.x) > 10 && fabs(translation.x) > fabs(translation.y) * 1.5 && translation.x < 0) {
-                NSLog(@"📱 [Interactive Push] 要求 ScrollView 手势失败（明显水平左滑）");
+                // NSLog(@"📱 [Interactive Push] 要求 ScrollView 手势失败（明显水平左滑）");
                 return YES; // 要求 ScrollView 手势失败
             }
         } else {

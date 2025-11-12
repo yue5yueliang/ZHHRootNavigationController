@@ -17,7 +17,7 @@
 
 - ✅ **独立导航栏管理** - 每个页面可以拥有完全独立的导航栏样式
 - ✅ **全屏滑动返回** - 支持从屏幕任意位置滑动返回，可自定义触发区域
-- ✅ **交互式推送** - 支持右侧边缘左滑触发 push 操作（可选）
+- ✅ **交互式推送** - 支持右侧边缘左滑触发 push，TabBar 与主页同步偏移的抖音式效果
 - ✅ **自定义转场动画** - 灵活的转场动画支持
 - ✅ **完全兼容系统 API** - 无缝替换 `UINavigationController`
 - ✅ **轻量级无侵入** - 不需要修改现有业务逻辑
@@ -169,18 +169,30 @@ self.zhh_navigationBarHidden = YES;
 [self.navigationController setNavigationBarHidden:YES animated:YES];
 ```
 
-### 6. 交互式推送（右滑 Push）
+### 6. 交互式推送（右侧边缘左滑 Push）
 
 ```objc
-ZHHRootNavigationController *nav = [[ZHHRootNavigationController alloc] initWithRootViewController:rootVC];
-nav.zhh_enableInteractivePush = YES;  // 启用交互式推送
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    __weak typeof(self) weakSelf = self;
+    [self.navigationController zhh_enableInteractivePushWithHandler:^UIViewController * _Nonnull{
+        // 返回下一个要 push 的控制器，可按需自定义
+        return [weakSelf zhh_nextPushViewController];
+    }];
+}
 
-// 在 ViewController 中实现
 - (UIViewController *)zhh_nextPushViewController {
-    // 返回下一个要推入的控制器
-    return [[NextViewController alloc] init];
+    UIViewController *nextVC = [[NextViewController alloc] init];
+    nextVC.title = @"交互式推送示例";
+    return nextVC;
 }
 ```
+
+> ✨ 交互式推送会自动：
+> - 智能处理与 ScrollView 的手势冲突
+> - 让主页、导航栏、TabBar 同步偏移，新页面如抖音般覆盖
+> - 在 push 完成时自动隐藏 TabBar，返回时顺滑恢复
 
 ### 7. 使用 TabBarController
 
@@ -218,7 +230,7 @@ self.window.rootViewController = nav;
 | `zhh_topViewController` | UIViewController | - | 当前导航栈顶部控制器（只读） |
 | `zhh_visibleViewController` | UIViewController | - | 当前可见控制器（只读） |
 | `zhh_viewControllers` | NSArray | - | 导航栈中所有控制器（只读） |
-| `zhh_enableInteractivePush` | BOOL | NO | 是否启用交互式推送 |
+| `zhh_enableInteractivePushWithHandler:` | 方法 | - | 启用交互式左滑 push，传入返回下一个 VC 的 block |
 
 ### UIViewController 扩展属性
 

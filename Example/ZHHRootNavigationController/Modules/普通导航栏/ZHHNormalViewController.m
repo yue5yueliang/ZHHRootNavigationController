@@ -8,6 +8,7 @@
 
 #import "ZHHNormalViewController.h"
 #import <Masonry/Masonry.h>
+#import <UINavigationController+ZHHInteractivePush.h>
 
 @interface ZHHNormalViewController ()
 @property (nonatomic, strong) UILabel *infoLabel;
@@ -24,6 +25,14 @@
     
     [self setupNavigationBar];
     [self setupContent];
+    
+    // 启用左滑 push 手势，保持与发现页一致的体验
+    if (self.navigationController) {
+        __weak typeof(self) weakSelf = self;
+        [self.navigationController zhh_enableInteractivePushWithHandler:^UIViewController * _Nonnull{
+            return [weakSelf zhh_nextPushViewController];
+        }];
+    }
 }
 
 - (void)setupNavigationBar {
@@ -222,6 +231,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self updateInfoLabel];
+}
+
+/// 供交互式左滑 push 使用：创建下一个普通导航栏页面
+- (UIViewController *)zhh_nextPushViewController {
+    ZHHNormalViewController *vc = [[ZHHNormalViewController alloc] init];
+    return vc;
 }
 
 - (BOOL)canBecomeFirstResponder {

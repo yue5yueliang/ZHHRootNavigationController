@@ -20,7 +20,12 @@
     self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.97 blue:1.0 alpha:1.0];
     
     // 启用交互式推送（从右侧边缘左滑可触发 push）
-//    self.navigationController.zhh_enableInteractivePush = YES;
+    if (self.navigationController) {
+        __weak typeof(self) weakSelf = self;
+        [self.navigationController zhh_enableInteractivePushWithHandler:^UIViewController * _Nonnull{
+            return [weakSelf zhh_nextPushViewController];
+        }];
+    }
     
     UILabel *label = [[UILabel alloc] init];
     label.text = @"🔍 发现页面\n\n👈 向左滑动试试交互式推送";
