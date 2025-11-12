@@ -38,6 +38,10 @@
         tabBar = navController.tabBarController.tabBar;
     }
     
+    // 背景整体视图与快照（用于实现“背后整体同步偏移，但不直接推 tabbar”）
+    __block UIView *backingView = nil;            // 优先取 tabBarController.view，包含导航和 TabBar
+    __block UIView *backgroundSnapshot = nil;     // 仅用于动画期显示与偏移
+    
     // 保存 TabBar 的初始状态（用于取消转场时恢复）
     CGAffineTransform initialTabBarTransform = tabBar ? tabBar.transform : CGAffineTransformIdentity;
     BOOL initialTabBarHidden = tabBar ? tabBar.hidden : NO;
@@ -59,7 +63,7 @@
     UIImageView *shadowView = nil;
     
     if (isPush) {
-        // Push 时：wrapperView 包含 toVC（新页面）
+        // Push 时：wrapperView 包含 toVC（新页面），并在其下方放置背景快照（包含导航+TabBar）
         wrapperView = [[UIView alloc] initWithFrame:screenBounds];
         wrapperView.backgroundColor = [UIColor clearColor];
         
@@ -70,12 +74,12 @@
         shadowView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
         [wrapperView addSubview:shadowView];
         
-        // 添加 toVC 视图
+        // 添加 toVC 视图（位于最上层，覆盖背景与 TabBar）
         toVC.view.frame = screenBounds;
         toVC.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [wrapperView addSubview:toVC.view];
         
-        // 将 wrapperView 添加到能覆盖 TabBar 的宿主视图
+        // 计算宿主视图：优先使用 TabBar 与导航的共同父视图，否则使用 window，最后退回 containerView
         // 优先使用 TabBar 与导航视图的共同父视图，其次使用 window，最后退回 containerView
         UIView *tabBarSuperview = tabBar.superview;
         UIView *navSuperview = navController.view.superview;
@@ -87,6 +91,25 @@
         } else {
             targetSuperview = containerView;
         }
+        
+        // 背景整体：使用 tabBarController.view（包含导航与 TabBar），否则退回导航视图
+        backingView = navController.tabBarController ? navController.tabBarController.view : navController.view;
+        
+        // 创建背景快照（不直接推动真实 TabBar，而是推动快照）
+        // 使用坐标转换，确保快照与原视图对齐
+        if (backingView) {
+            CGRect backingFrameInTarget = backingView.frame;
+            if (backingView.superview && backingView.superview != targetSuperview) {
+                backingFrameInTarget = [backingView.superview convertRect:backingView.frame toView:targetSuperview];
+            }
+            backgroundSnapshot = [backingView snapshotViewAfterScreenUpdates:NO];
+            backgroundSnapshot.frame = backingFrameInTarget;
+            [targetSuperview addSubview:backgroundSnapshot];
+        }
+        
+        // 隐藏真实的背景视图（包含 TabBar），避免与快照重叠
+        backingView.hidden = YES;
+        
         [targetSuperview addSubview:wrapperView];
         [targetSuperview bringSubviewToFront:wrapperView];
         
@@ -157,12 +180,9 @@
                         options:options
                      animations:^{
         if (isPush) {
-            // Push 动画：fromVC 左移，wrapperView 进入屏幕
-            fromVC.view.transform = CGAffineTransformMakeTranslation(leftOffset, 0);
-            
-            // TabBar 也左移（与 fromVC 同步）
-            if (tabBar) {
-                tabBar.transform = CGAffineTransformMakeTranslation(leftOffset, 0);
+            // Push 动画：背景快照左移，wrapperView（新页面）进入屏幕
+            if (backgroundSnapshot) {
+                backgroundSnapshot.transform = CGAffineTransformMakeTranslation(leftOffset, 0);
             }
             
             // wrapperView 进入屏幕
@@ -197,9 +217,9 @@
             fromVC.view.transform = initialFromVCTransform;
             fromVC.view.layer.transform = CATransform3DIdentity;
             
-            // 恢复 TabBar 的 transform
-            if (tabBar) {
-                tabBar.transform = initialTabBarTransform;
+            // 恢复真实背景视图（包含 TabBar）
+            if (backingView) {
+                backingView.hidden = NO;
             }
             
             // 2. 恢复可见性和透明度
@@ -240,6 +260,12 @@
             shadowView.alpha = 0.f;
             [wrapperView removeFromSuperview];
             
+            // 清理背景快照
+            if (backgroundSnapshot) {
+                backgroundSnapshot.transform = CGAffineTransformIdentity;
+                [backgroundSnapshot removeFromSuperview];
+            }
+            
             NSLog(@"📱 [Push Transition] fromVC.view 状态已恢复：frame=%@, transform=%@, superview=%@", 
                   NSStringFromCGRect(fromVC.view.frame),
                   NSStringFromCGAffineTransform(fromVC.view.transform),
@@ -272,6 +298,17 @@
                 
                 // 关键：确保 toVC.view 在 containerView 的最前面
                 [containerView bringSubviewToFront:toVC.view];
+                
+                // 恢复真实背景视图显示（系统基于 hidesBottomBarWhenPushed 隐藏 TabBar）
+                if (backingView) {
+                    backingView.hidden = NO;
+                }
+                
+                // 清理背景快照
+                if (backgroundSnapshot) {
+                    backgroundSnapshot.transform = CGAffineTransformIdentity;
+                    [backgroundSnapshot removeFromSuperview];
+                }
                 
                 // 强制处理层级关系：确保被 push 的界面在 TabBar 之上
                 if (window && tabBar && navController && navController.view) {
@@ -332,13 +369,7 @@
                 // 移除 wrapperView
                 [wrapperView removeFromSuperview];
                 
-                // 对于交互式 push，保持 TabBar 在偏移位置（不要隐藏，不要重置 transform）
-                // 这样 Pop 时 TabBar 就能从偏移位置跟随主界面移回原位
-                if (tabBar) {
-                    // 保持 TabBar 的 transform 在左偏移位置，不重置
-                    // TabBar 会被新页面覆盖（因为 toVC.view 在最前面），但状态保持，Pop 时可以看到它移回
-                    // 注意：不设置 hidden，保持可见状态（虽然被覆盖）
-                }
+                // 不再直接推动 TabBar，交互期间的视觉移动由背景快照承担
             } else {
                 // Pop 完成：fromVC 已经从 wrapperView 中移出
                 // 从 wrapperView 中移除 fromVC.view
