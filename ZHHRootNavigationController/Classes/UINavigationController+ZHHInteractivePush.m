@@ -155,6 +155,14 @@
                 self.delegate = self.zhh_navigationDelegater;
                 self.zhh_navigationDelegater.interactiveTransition = self.zhh_interactiveTransition;
                 
+                // 确保被 push 的页面在完成后隐藏底部 TabBar（系统会基于该属性布局）
+                // 仅对交互式左滑 push 生效，不影响常规 push 行为
+                @try {
+                    nextVC.hidesBottomBarWhenPushed = YES;
+                } @catch (__unused NSException *exception) {
+                    // 安全兜底：不抛异常即可
+                }
+                
                 // 触发 push
                 [self pushViewController:nextVC animated:YES];
                 

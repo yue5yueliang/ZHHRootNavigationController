@@ -75,8 +75,18 @@
         toVC.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [wrapperView addSubview:toVC.view];
         
-        // 将 wrapperView 添加到 window（覆盖 TabBar）或 containerView
-        UIView *targetSuperview = window ?: containerView;
+        // 将 wrapperView 添加到能覆盖 TabBar 的宿主视图
+        // 优先使用 TabBar 与导航视图的共同父视图，其次使用 window，最后退回 containerView
+        UIView *tabBarSuperview = tabBar.superview;
+        UIView *navSuperview = navController.view.superview;
+        UIView *targetSuperview = nil;
+        if (tabBarSuperview && navSuperview && tabBarSuperview == navSuperview) {
+            targetSuperview = tabBarSuperview;
+        } else if (window) {
+            targetSuperview = window;
+        } else {
+            targetSuperview = containerView;
+        }
         [targetSuperview addSubview:wrapperView];
         [targetSuperview bringSubviewToFront:wrapperView];
         
@@ -99,8 +109,17 @@
         fromVC.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [wrapperView addSubview:fromVC.view];
         
-        // 将 wrapperView 添加到 window（覆盖 TabBar）或 containerView
-        UIView *targetSuperview = window ?: containerView;
+        // 将 wrapperView 添加到能覆盖 TabBar 的宿主视图
+        UIView *tabBarSuperview = tabBar.superview;
+        UIView *navSuperview = navController.view.superview;
+        UIView *targetSuperview = nil;
+        if (tabBarSuperview && navSuperview && tabBarSuperview == navSuperview) {
+            targetSuperview = tabBarSuperview;
+        } else if (window) {
+            targetSuperview = window;
+        } else {
+            targetSuperview = containerView;
+        }
         [targetSuperview addSubview:wrapperView];
         [targetSuperview bringSubviewToFront:wrapperView];
         
