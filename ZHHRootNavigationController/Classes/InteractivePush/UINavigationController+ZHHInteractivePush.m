@@ -3,8 +3,7 @@
 //  ZHHAnneKitExample
 //
 //  Created by 桃色三岁 on 2024/9/19.
-//  Modified to support delayed push + true interactive follow.
-//  2025/11/02
+//  Copyright © 2024 桃色三岁. All rights reserved.
 //
 
 #import "UINavigationController+ZHHInteractivePush.h"
@@ -282,8 +281,7 @@
         scrollViewParent = scrollViewParent.superview;
     }
     
-    // NSLog(@"📱 [Interactive Push] translation: (%.0f, %.0f), velocity: (%.0f, %.0f), 在ScrollView上: %d", 
-          translation.x, translation.y, velocity.x, velocity.y, isOnScrollView);
+    // NSLog(@"📱 [Interactive Push] translation: (%.0f, %.0f), velocity: (%.0f, %.0f), 在ScrollView上: %d", translation.x, translation.y, velocity.x, velocity.y, isOnScrollView);
     
     // 如果已经在 ScrollView 上，需要更严格的水平滑动判断
     if (isOnScrollView) {

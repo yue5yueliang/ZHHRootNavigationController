@@ -2,7 +2,8 @@
 //  ZHHNavigationPushTransition.m
 //  ZHHRootNavigationController
 //
-//  Created by 桃色三岁 on 2025/11/2.
+//  Created by 桃色三岁 on 2024/9/19.
+//  Copyright © 2024 桃色三岁. All rights reserved.
 //
 
 #import "ZHHNavigationPushTransition.h"
@@ -41,10 +42,6 @@
     // 背景整体视图与快照（用于实现“背后整体同步偏移，但不直接推 tabbar”）
     __block UIView *backingView = nil;            // 优先取 tabBarController.view，包含导航和 TabBar
     __block UIView *backgroundSnapshot = nil;     // 仅用于动画期显示与偏移
-    
-    // 保存 TabBar 的初始状态（用于取消转场时恢复）
-    CGAffineTransform initialTabBarTransform = tabBar ? tabBar.transform : CGAffineTransformIdentity;
-    BOOL initialTabBarHidden = tabBar ? tabBar.hidden : NO;
     
     // 保存 fromVC.view 的初始状态（用于取消转场时恢复）
     CGRect initialFromVCFrame = fromVC.view.frame;
@@ -266,10 +263,10 @@
                 [backgroundSnapshot removeFromSuperview];
             }
             
-            // NSLog(@"📱 [Push Transition] fromVC.view 状态已恢复：frame=%@, transform=%@, superview=%@", 
-                  NSStringFromCGRect(fromVC.view.frame),
-                  NSStringFromCGAffineTransform(fromVC.view.transform),
-                  fromVC.view.superview);
+//             NSLog(@"📱 [Push Transition] fromVC.view 状态已恢复：frame=%@, transform=%@, superview=%@", 
+//                  NSStringFromCGRect(fromVC.view.frame),
+//                  NSStringFromCGAffineTransform(fromVC.view.transform),
+//                  fromVC.view.superview);
         } else {
             // 转场成功完成
             if (isPush) {

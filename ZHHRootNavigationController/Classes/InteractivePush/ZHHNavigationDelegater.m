@@ -2,7 +2,8 @@
 //  ZHHNavigationDelegater.m
 //  ZHHRootNavigationController
 //
-//  Created by 桃色三岁 on 2025/11/2.
+//  Created by 桃色三岁 on 2024/9/19.
+//  Copyright © 2024 桃色三岁. All rights reserved.
 //
 
 #import "ZHHNavigationDelegater.h"
