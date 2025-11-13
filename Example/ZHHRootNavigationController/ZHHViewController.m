@@ -26,7 +26,6 @@
     self.title = @"首页";
     
     // 启用交互式推送（从右侧边缘左滑可触发 push）
-    __weak typeof(self) weakSelf = self;
     [self.navigationController zhh_enableInteractivePushWithHandler:^UIViewController * _Nonnull{
         // 返回下一个页面实例
         return [[ZHHNormalViewController alloc] init];
