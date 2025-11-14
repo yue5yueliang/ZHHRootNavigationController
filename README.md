@@ -17,7 +17,6 @@
 
 - ✅ **独立导航栏管理** - 每个页面可以拥有完全独立的导航栏样式
 - ✅ **全屏滑动返回** - 支持从屏幕任意位置滑动返回，可自定义触发区域
-- ✅ **交互式推送** - 支持右侧边缘左滑触发 push，TabBar 与主页同步偏移的抖音式效果
 - ✅ **自定义转场动画** - 灵活的转场动画支持
 - ✅ **完全兼容系统 API** - 无缝替换 `UINavigationController`
 - ✅ **轻量级无侵入** - 不需要修改现有业务逻辑
@@ -169,30 +168,10 @@ self.zhh_navigationBarHidden = YES;
 [self.navigationController setNavigationBarHidden:YES animated:YES];
 ```
 
-### 6. 交互式推送（右侧边缘左滑 Push）
+### 6. 交互式推送（已拆分为独立库）
 
-```objc
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    __weak typeof(self) weakSelf = self;
-    [self.navigationController zhh_enableInteractivePushWithHandler:^UIViewController * _Nonnull{
-        // 返回下一个要 push 的控制器，可按需自定义
-        return [weakSelf zhh_nextPushViewController];
-    }];
-}
-
-- (UIViewController *)zhh_nextPushViewController {
-    UIViewController *nextVC = [[NextViewController alloc] init];
-    nextVC.title = @"交互式推送示例";
-    return nextVC;
-}
-```
-
-> ✨ 交互式推送会自动：
-> - 智能处理与 ScrollView 的手势冲突
-> - 让主页、导航栏、TabBar 同步偏移，新页面如抖音般覆盖
-> - 在 push 完成时自动隐藏 TabBar，返回时顺滑恢复
+交互式左滑 Push 已迁移至独立库 `ZHHInteractivePush`，请前往该仓库查看使用方式与示例：  
+`https://github.com/yue5yueliang/ZHHInteractivePush`
 
 ### 7. 使用 TabBarController
 
@@ -230,7 +209,7 @@ self.window.rootViewController = nav;
 | `zhh_topViewController` | UIViewController | - | 当前导航栈顶部控制器（只读） |
 | `zhh_visibleViewController` | UIViewController | - | 当前可见控制器（只读） |
 | `zhh_viewControllers` | NSArray | - | 导航栈中所有控制器（只读） |
-| `zhh_enableInteractivePushWithHandler:` | 方法 | - | 启用交互式左滑 push，传入返回下一个 VC 的 block |
+| （交互式 Push 请使用 `ZHHInteractivePush`） | - | - | 参见 `ZHHInteractivePush` 仓库 |
 
 ### UIViewController 扩展属性
 
@@ -244,17 +223,7 @@ self.window.rootViewController = nav;
 
 ### 常量配置
 
-如需调整交互参数，可修改以下常量：
-
-```objc
-// UINavigationController+ZHHInteractivePush.m
-const CGFloat ZHHInteractivePushVelocityThreshold = 200.0;    // 手势速度阈值
-const CGFloat ZHHInteractivePushPercentThreshold = 0.5;       // 转场完成百分比
-const CGFloat ZHHInteractivePushLeftViewOffsetRatio = 112.0 / 375.0;  // 左侧视图偏移比例
-
-// ZHHRootNavigationController.m
-static const NSTimeInterval ZHHPushAnimationDuration = 0.35;  // 推送动画时长
-```
+如需交互式 Push，请参考 `ZHHInteractivePush` 的 README 与配置。
 
 ---
 

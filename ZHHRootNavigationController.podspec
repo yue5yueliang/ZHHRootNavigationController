@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
   s.name             = 'ZHHRootNavigationController'
-  s.version          = '0.0.6'
-  s.summary          = '生产级导航控制器，支持独立导航栏、全屏滑动返回、抖音式交互推送，经过性能优化和安全加固。'
+  s.version          = '0.0.7'
+  s.summary          = '生产级导航控制器（独立导航栏、全屏滑动返回）。交互式 Push 已拆分为独立库 ZHHInteractivePush。'
 
   s.description = <<-DESC
   现代应用越来越倾向于为不同的视图控制器定制导航栏，而不是依赖统一的全局样式。
@@ -18,11 +18,10 @@ Pod::Spec.new do |s|
   - **生产级稳定性**：完善的异常处理、内存管理和性能优化，代码质量评分 85.8/100。
   - **适配广泛场景**：适用于电商、内容阅读、社交、直播等多类 App，灵活适配多样化 UI 需求。
 
-  ### ⭐️ v0.0.6 更新亮点
-  - 🎬 抖音式交互 Left Push：使用背景快照同步偏移，Push 完成后自动覆盖 TabBar
-  - 🧭 Demo 体验优化：发现页、普通导航页默认开启左滑 push 示例
-  - 🧩 API 调整：统一通过 `zhh_enableInteractivePushWithHandler:` 注入 push 工厂方法
-  - 🧹 清理默认日志：注释调试 NSLog，避免发版时污染控制台
+  ### ⭐️ v0.0.7 更新亮点
+  - 🧩 结构调整：将“交互式左滑 Push”能力抽离为独立库 `ZHHInteractivePush`
+  - 🧭 本库专注于 Root 导航控制器与全屏返回，便于按需组合
+  - 🧹 清理已抽离模块的相关代码与说明
   
   ZHHRootNavigationController 让你的导航体验更自由、更丝滑、更稳定。
   DESC
