@@ -9,7 +9,6 @@
 #import <objc/runtime.h>
 #import "ZHHRootNavigationController.h"
 #import "UIViewController+ZHHRootNavigationController.h"
-#import "UINavigationController+ZHHInteractivePush.h"
 
 // 常量定义
 static const NSTimeInterval ZHHPushAnimationDuration = 0.35;  // 推送动画持续时间

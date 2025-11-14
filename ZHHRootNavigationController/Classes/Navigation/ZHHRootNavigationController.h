@@ -10,7 +10,6 @@
 
 #import "UIViewController+ZHHRootNavigationController.h"
 #import "ZHHViewControllerAnimatedTransitioning.h"
-#import "UINavigationController+ZHHInteractivePush.h"
 #import "UINavigationController+ZHHFullscreenPopGesture.h"
 
 NS_ASSUME_NONNULL_BEGIN

@@ -493,12 +493,14 @@
 				"${PODS_ROOT}/Target Support Files/Pods-ZHHRootNavigationController_Example/Pods-ZHHRootNavigationController_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/ZHHAnneKit/ZHHAnneKit.framework",
+				"${BUILT_PRODUCTS_DIR}/ZHHInteractivePush/ZHHInteractivePush.framework",
 				"${BUILT_PRODUCTS_DIR}/ZHHRootNavigationController/ZHHRootNavigationController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZHHAnneKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZHHInteractivePush.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ZHHRootNavigationController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -117,6 +117,9 @@ PODS:
   - ZHHAnneKit/Core/UIKit/UIView (0.2.2)
   - ZHHAnneKit/Core/UIKit/UIViewController (0.2.2)
   - ZHHAnneKit/Core/UIKit/UIWindow (0.2.2)
+  - ZHHInteractivePush (0.0.1):
+    - ZHHInteractivePush/Core (= 0.0.1)
+  - ZHHInteractivePush/Core (0.0.1)
   - ZHHRootNavigationController (0.0.6):
     - ZHHRootNavigationController/Core (= 0.0.6)
   - ZHHRootNavigationController/Core (0.0.6)
@@ -124,12 +127,14 @@ PODS:
 DEPENDENCIES:
   - Masonry
   - ZHHAnneKit
+  - ZHHInteractivePush
   - ZHHRootNavigationController (from `../`)
 
 SPEC REPOS:
   trunk:
     - Masonry
     - ZHHAnneKit
+    - ZHHInteractivePush
 
 EXTERNAL SOURCES:
   ZHHRootNavigationController:
@@ -138,8 +143,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   ZHHAnneKit: 931b2f99534d81134cbe99d03d0fc2b2c174a8c0
+  ZHHInteractivePush: dd8d1fd9afb893c10d5a1d73c51f5a9c9699a138
   ZHHRootNavigationController: 41e3483345af68ce5324dd60513f09b7f05a11b4
 
-PODFILE CHECKSUM: 377d3d964e6757014835007ac15a478de69bcebd
+PODFILE CHECKSUM: c782013c3baed8e4aa6de80bf27c2149ca797dab
 
 COCOAPODS: 1.16.2

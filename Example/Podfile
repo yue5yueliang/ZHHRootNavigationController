@@ -10,7 +10,7 @@ target 'ZHHRootNavigationController_Example' do
   pod 'ZHHRootNavigationController', :path => '../'
   pod 'Masonry'  # 自动布局框架，简化 AutoLayout 使用
   pod 'ZHHAnneKit'  # 自定义开发的工具库（常见功能封装）
-#  pod 'RTRootNavigationController'  # 自定义开发的工具库（常见功能封装）
+  pod 'ZHHInteractivePush'  # 自定义开发的工具库（常见功能封装）
   target 'ZHHRootNavigationController_Tests' do
     inherit! :search_paths
 

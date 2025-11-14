@@ -10,6 +10,7 @@
 #import <Masonry/Masonry.h>
 #import <ZHHAnneKit/ZHHAnneKit.h>
 #import <ZHHRootNavigationController/ZHHRootNavigationController.h>
+#import <ZHHInteractivePush/UINavigationController+ZHHInteractivePush.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
