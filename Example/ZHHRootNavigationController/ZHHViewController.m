@@ -37,6 +37,85 @@
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // 确保主页始终是竖屏方向
+    [self forcePortraitOrientation];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // 再次确保方向正确（延迟执行，确保动画完成）
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self forcePortraitOrientation];
+    });
+}
+
+/// 获取当前界面方向（兼容不同 iOS 版本）
+- (UIInterfaceOrientation)currentInterfaceOrientation {
+    if (@available(iOS 16.0, *)) {
+        // iOS 16+ 使用 UIWindowScene 的 interfaceOrientation
+        UIWindowScene *windowScene = (UIWindowScene *)self.view.window.windowScene;
+        if (windowScene) {
+            return windowScene.interfaceOrientation;
+        }
+    }
+    
+    // iOS 13-15 或无法获取 windowScene 时，使用 statusBarOrientation（已弃用但可用）
+    #pragma clang diagnostic push
+    #pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    return [[UIApplication sharedApplication] statusBarOrientation];
+    #pragma clang diagnostic pop
+}
+
+/// 强制切换到竖屏方向
+- (void)forcePortraitOrientation {
+    UIInterfaceOrientation currentOrientation = [self currentInterfaceOrientation];
+    
+    // 如果当前不是竖屏，强制切换
+    if (currentOrientation != UIInterfaceOrientationPortrait) {
+        
+        if (@available(iOS 16.0, *)) {
+            // iOS 16+ 使用新的 API
+            UIWindowScene *windowScene = (UIWindowScene *)self.view.window.windowScene;
+            if (windowScene) {
+                UIWindowSceneGeometryPreferencesIOS *geometryPreferences = 
+                    [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:UIInterfaceOrientationMaskPortrait];
+                [windowScene requestGeometryUpdateWithPreferences:geometryPreferences 
+                                                      errorHandler:^(NSError * _Nonnull error) {
+                    NSLog(@"⚠️ 主页方向切换失败: %@", error);
+                }];
+            }
+        } else {
+            // iOS 16 之前使用 UIDevice
+            NSNumber *orientationValue = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+            [[UIDevice currentDevice] setValue:orientationValue forKey:@"orientation"];
+        }
+        
+        // 通知系统尝试旋转
+        [UIViewController attemptRotationToDeviceOrientation];
+    }
+}
+
+#pragma mark - 屏幕方向支持
+
+/// 只支持竖屏
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+/// 首选竖屏
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    return UIInterfaceOrientationPortrait;
+}
+
+/// 不允许自动旋转
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 
 #pragma mark - UITableViewDataSource
 

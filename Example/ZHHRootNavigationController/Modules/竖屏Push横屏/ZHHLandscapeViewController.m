@@ -9,7 +9,7 @@
 #import "ZHHLandscapeViewController.h"
 
 @interface ZHHLandscapeViewController ()
-
+@property (nonatomic, assign) BOOL isPopping; // 标记是否正在 pop
 @end
 
 @implementation ZHHLandscapeViewController
@@ -50,6 +50,26 @@
         [orientationLabel.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor],
         [orientationLabel.topAnchor constraintEqualToAnchor:label.bottomAnchor constant:30]
     ]];
+    
+    // 监听侧滑返回手势，在手势开始时切换方向
+    if (self.navigationController.interactivePopGestureRecognizer) {
+        [self.navigationController.interactivePopGestureRecognizer addTarget:self action:@selector(handleInteractivePopGesture:)];
+    }
+}
+
+/// 处理侧滑返回手势
+- (void)handleInteractivePopGesture:(UIScreenEdgePanGestureRecognizer *)gesture {
+    if (gesture.state == UIGestureRecognizerStateBegan) {
+        // 标记正在 pop
+        self.isPopping = YES;
+        
+        // 侧滑开始时，立即切换回竖屏方向
+        [self forcePortraitOrientationBeforePop];
+    } else if (gesture.state == UIGestureRecognizerStateCancelled || 
+               gesture.state == UIGestureRecognizerStateFailed) {
+        // 如果手势被取消或失败，重置标志
+        self.isPopping = NO;
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -62,6 +82,22 @@
         currentOrientation != UIInterfaceOrientationLandscapeRight) {
         [self forceLandscapeOrientation];
     }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    // 如果是 pop 操作，确保方向已切换（作为备用方案）
+    if (self.isPopping) {
+        [self forcePortraitOrientationBeforePop];
+    }
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    // 重置标志
+    self.isPopping = NO;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -121,6 +157,29 @@
     }
 }
 
+/// 强制切换到竖屏方向（用于 pop 前切换）
+- (void)forcePortraitOrientationBeforePop {
+    if (@available(iOS 16.0, *)) {
+        // iOS 16+ 使用新的 API
+        UIWindowScene *windowScene = (UIWindowScene *)self.view.window.windowScene;
+        if (windowScene) {
+            UIWindowSceneGeometryPreferencesIOS *geometryPreferences = 
+                [[UIWindowSceneGeometryPreferencesIOS alloc] initWithInterfaceOrientations:UIInterfaceOrientationMaskPortrait];
+            [windowScene requestGeometryUpdateWithPreferences:geometryPreferences 
+                                                  errorHandler:^(NSError * _Nonnull error) {
+                NSLog(@"⚠️ 方向切换失败: %@", error);
+            }];
+        }
+    } else {
+        // iOS 16 之前使用 UIDevice
+        NSNumber *orientationValue = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
+        [[UIDevice currentDevice] setValue:orientationValue forKey:@"orientation"];
+    }
+    
+    // 通知系统尝试旋转
+    [UIViewController attemptRotationToDeviceOrientation];
+}
+
 - (NSString *)currentOrientationString {
     UIInterfaceOrientation orientation = [self currentInterfaceOrientation];
     switch (orientation) {
@@ -152,6 +211,35 @@
 /// 允许自动旋转
 - (BOOL)shouldAutorotate {
     return YES;
+}
+
+#pragma mark - 自定义返回按钮
+
+/// 自定义返回按钮，在返回前先切换方向
+- (UIBarButtonItem *)zhh_customBackBarButtonItemWithTarget:(id)target action:(SEL)action {
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setImage:[UIImage imageNamed:@"icon_back_dark"] forState:UIControlStateNormal];
+    [button sizeToFit];
+    
+    // 自定义 action：先切换方向，再执行 pop
+    [button addTarget:self action:@selector(customBackAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    return [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+/// 自定义返回按钮的 action
+- (void)customBackAction:(UIButton *)sender {
+    // 标记正在 pop
+    self.isPopping = YES;
+    
+    // 立即切换回竖屏方向
+    [self forcePortraitOrientationBeforePop];
+    
+    // 延迟一小段时间确保方向切换开始，然后执行 pop
+    // 使用无动画 pop 可以避免方向切换过程中的视觉闪烁
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.navigationController popViewControllerAnimated:NO];
+    });
 }
 
 #pragma mark - 状态栏设置
