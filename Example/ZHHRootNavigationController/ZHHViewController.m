@@ -100,6 +100,10 @@
             /// 渐变导航栏
             [self zhh_pushViewControllerWithClassName:@"ZHHGradientNavBarViewController" title:@"渐变导航栏"];
             break;
+        case 10:
+            /// 竖屏Push横屏测试
+            [self zhh_pushViewControllerWithClassName:@"ZHHPortraitToLandscapeViewController" title:@"横屏页面"];
+            break;
             
         default:
             break;
@@ -146,7 +150,8 @@
             @"🎬 自定义转场动画",
             @"🛠 带工具栏页面",
             @"👁 隐藏状态栏",
-            @"🎨 渐变导航栏"
+            @"🎨 渐变导航栏",
+            @"🔄 竖屏Push横屏测试"
         ];
     }
     return _dataSource;

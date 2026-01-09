@@ -61,5 +61,11 @@
     // to restore the scene back to its current state.
 }
 
+#pragma mark - 屏幕方向支持
+
+/// iOS 13+ 使用 SceneDelegate 时，方向支持由窗口的根视图控制器决定
+/// 这个方法在 AppDelegate 中实现，但 SceneDelegate 场景下可能不会被调用
+/// 实际的方向控制由各个 ViewController 的 supportedInterfaceOrientations 决定
+
 @end
 

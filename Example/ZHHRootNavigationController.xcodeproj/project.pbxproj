@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -41,6 +41,8 @@
 		7E620C552EAA632C00FB7E9E /* ZHHTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C532EAA632C00FB7E9E /* ZHHTabBarController.m */; };
 		7E620C582EAA661B00FB7E9E /* ZHHDiscoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C572EAA661B00FB7E9E /* ZHHDiscoverViewController.m */; };
 		7E620C5B2EAA68CD00FB7E9E /* ZHHSceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E620C5A2EAA68CD00FB7E9E /* ZHHSceneDelegate.m */; };
+		7EA787652F113090006E1C04 /* ZHHLandscapeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA787612F113090006E1C04 /* ZHHLandscapeViewController.m */; };
+		7EA787662F113090006E1C04 /* ZHHPortraitToLandscapeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EA787632F113090006E1C04 /* ZHHPortraitToLandscapeViewController.m */; };
 		9F2F19545D66038C9962990D /* Pods_ZHHRootNavigationController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8EA56FD8207124630E350C44 /* Pods_ZHHRootNavigationController_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -119,6 +121,10 @@
 		7E620C572EAA661B00FB7E9E /* ZHHDiscoverViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHDiscoverViewController.m; sourceTree = "<group>"; };
 		7E620C592EAA68CD00FB7E9E /* ZHHSceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHSceneDelegate.h; sourceTree = "<group>"; };
 		7E620C5A2EAA68CD00FB7E9E /* ZHHSceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHSceneDelegate.m; sourceTree = "<group>"; };
+		7EA787602F113090006E1C04 /* ZHHLandscapeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHLandscapeViewController.h; sourceTree = "<group>"; };
+		7EA787612F113090006E1C04 /* ZHHLandscapeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHLandscapeViewController.m; sourceTree = "<group>"; };
+		7EA787622F113090006E1C04 /* ZHHPortraitToLandscapeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZHHPortraitToLandscapeViewController.h; sourceTree = "<group>"; };
+		7EA787632F113090006E1C04 /* ZHHPortraitToLandscapeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZHHPortraitToLandscapeViewController.m; sourceTree = "<group>"; };
 		8EA56FD8207124630E350C44 /* Pods_ZHHRootNavigationController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZHHRootNavigationController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C69EBFFE5C52C6AC81B85A70 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -360,6 +366,7 @@
 				7E620C202EA9FA5300FB7E9E /* 渐变导航栏 */,
 				7E620C232EA9FA5300FB7E9E /* 禁用侧滑返回 */,
 				7E620C262EA9FA5300FB7E9E /* 普通导航栏 */,
+				7EA787642F113090006E1C04 /* 竖屏Push横屏 */,
 				7E620C292EA9FA5300FB7E9E /* 隐藏导航栏 */,
 				7E620C2C2EA9FA5300FB7E9E /* 隐藏状态栏 */,
 				7E620C312EA9FA5300FB7E9E /* 自定义转场动画 */,
@@ -380,6 +387,17 @@
 				7E620C532EAA632C00FB7E9E /* ZHHTabBarController.m */,
 			);
 			path = TabBarController;
+			sourceTree = "<group>";
+		};
+		7EA787642F113090006E1C04 /* 竖屏Push横屏 */ = {
+			isa = PBXGroup;
+			children = (
+				7EA787602F113090006E1C04 /* ZHHLandscapeViewController.h */,
+				7EA787612F113090006E1C04 /* ZHHLandscapeViewController.m */,
+				7EA787622F113090006E1C04 /* ZHHPortraitToLandscapeViewController.h */,
+				7EA787632F113090006E1C04 /* ZHHPortraitToLandscapeViewController.m */,
+			);
+			path = "竖屏Push横屏";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,8 +447,9 @@
 		6003F582195388D10070C39A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				CLASSPREFIX = ZHH;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 1640;
 				ORGANIZATIONNAME = "桃色三岁";
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
@@ -443,10 +462,9 @@
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "ZHHRootNavigationController" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -579,6 +597,8 @@
 				7E620C502EAA0D9900FB7E9E /* ZHHFlipTransition.m in Sources */,
 				7E620C512EAA0D9900FB7E9E /* ZHHScaleTransition.m in Sources */,
 				7E620C482EA9FA5300FB7E9E /* ZHHPushAndRemoveViewController.m in Sources */,
+				7EA787652F113090006E1C04 /* ZHHLandscapeViewController.m in Sources */,
+				7EA787662F113090006E1C04 /* ZHHPortraitToLandscapeViewController.m in Sources */,
 				7E620C492EA9FA5300FB7E9E /* ZHHCustomNavigationBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,23 +645,39 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -654,7 +690,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -665,29 +701,45 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -700,6 +752,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = C7337H3ZTV;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ZHHRootNavigationController/ZHHRootNavigationController-Prefix.pch";
 				INFOPLIST_FILE = "ZHHRootNavigationController/ZHHRootNavigationController-Info.plist";
@@ -719,6 +772,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = C7337H3ZTV;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "ZHHRootNavigationController/ZHHRootNavigationController-Prefix.pch";
 				INFOPLIST_FILE = "ZHHRootNavigationController/ZHHRootNavigationController-Info.plist";

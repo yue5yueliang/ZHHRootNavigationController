@@ -660,17 +660,23 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 
 /// 返回顶部视图控制器的状态栏样式
 - (UIStatusBarStyle)preferredStatusBarStyle {
-    return [self.topViewController preferredStatusBarStyle];
+    // 需要解包容器以获取实际内容控制器的状态栏样式
+    UIViewController *topVC = ZHHSafeUnwrapViewController(self.topViewController);
+    return topVC ? [topVC preferredStatusBarStyle] : [super preferredStatusBarStyle];
 }
 
 /// 返回顶部视图控制器是否隐藏状态栏
 - (BOOL)prefersStatusBarHidden {
-    return [self.topViewController prefersStatusBarHidden];
+    // 需要解包容器以获取实际内容控制器的状态栏隐藏状态
+    UIViewController *topVC = ZHHSafeUnwrapViewController(self.topViewController);
+    return topVC ? [topVC prefersStatusBarHidden] : [super prefersStatusBarHidden];
 }
 
 /// 返回状态栏更新动画类型
 - (UIStatusBarAnimation)preferredStatusBarUpdateAnimation {
-    return [self.topViewController preferredStatusBarUpdateAnimation];
+    // 需要解包容器以获取实际内容控制器的状态栏更新动画
+    UIViewController *topVC = ZHHSafeUnwrapViewController(self.topViewController);
+    return topVC ? [topVC preferredStatusBarUpdateAnimation] : [super preferredStatusBarUpdateAnimation];
 }
 
 /// 如果选择器在导航控制器上有实现，则将其转发给导航控制器
@@ -901,17 +907,23 @@ __attribute((overloadable)) static inline UIViewController *ZHHSafeWrapViewContr
 
 - (BOOL)shouldAutorotate {
     // 返回当前顶部视图控制器是否支持自动旋转
-    return self.topViewController.shouldAutorotate;
+    // 需要解包容器以获取实际内容控制器的方向支持
+    UIViewController *topVC = ZHHSafeUnwrapViewController(self.topViewController);
+    return topVC ? topVC.shouldAutorotate : [super shouldAutorotate];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     // 返回当前顶部视图控制器支持的界面方向
-    return self.topViewController.supportedInterfaceOrientations;
+    // 需要解包容器以获取实际内容控制器的方向支持，避免出现先竖屏后横屏的问题
+    UIViewController *topVC = ZHHSafeUnwrapViewController(self.topViewController);
+    return topVC ? topVC.supportedInterfaceOrientations : [super supportedInterfaceOrientations];
 }
 
 - (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
     // 返回当前顶部视图控制器在呈现时首选的界面方向
-    return self.topViewController.preferredInterfaceOrientationForPresentation;
+    // 需要解包容器以获取实际内容控制器的方向支持，避免出现先竖屏后横屏的问题
+    UIViewController *topVC = ZHHSafeUnwrapViewController(self.topViewController);
+    return topVC ? topVC.preferredInterfaceOrientationForPresentation : [super preferredInterfaceOrientationForPresentation];
 }
 
 - (BOOL)respondsToSelector:(SEL)aSelector {
