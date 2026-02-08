@@ -173,27 +173,26 @@ self.zhh_navigationBarHidden = YES;
 交互式左滑 Push 已迁移至独立库 `ZHHInteractivePush`，请前往该仓库查看使用方式与示例：  
 `https://github.com/yue5yueliang/ZHHInteractivePush`
 
-### 7. 使用 TabBarController
+### 7. 使用 TabBarController（推荐多栈方式）
+
+符合 Apple 标准：window 根为 TabBarController，每个 tab 独立一个 ZHHRootNavigationController。
 
 ```objc
 UITabBarController *tabController = [[UITabBarController alloc] init];
 
-// 为每个 tab 创建导航控制器
+// 为每个 tab 创建 ZHHRootNavigationController
 UIViewController *vc1 = [[FirstViewController alloc] init];
 UIViewController *vc2 = [[SecondViewController alloc] init];
 UIViewController *vc3 = [[ThirdViewController alloc] init];
 
 tabController.viewControllers = @[
-    [[ZHHContainerNavigationController alloc] initWithRootViewController:vc1],
-    [[ZHHContainerNavigationController alloc] initWithRootViewController:vc2],
-    [[ZHHContainerNavigationController alloc] initWithRootViewController:vc3]
+    [[ZHHRootNavigationController alloc] initWithRootViewController:vc1],
+    [[ZHHRootNavigationController alloc] initWithRootViewController:vc2],
+    [[ZHHRootNavigationController alloc] initWithRootViewController:vc3]
 ];
 
-// 使用 ZHHRootNavigationController 包装
-ZHHRootNavigationController *nav = [[ZHHRootNavigationController alloc] 
-    initWithRootViewControllerNoWrapping:tabController];
-
-self.window.rootViewController = nav;
+// window 根直接设为 TabBarController
+self.window.rootViewController = tabController;
 ```
 
 ---

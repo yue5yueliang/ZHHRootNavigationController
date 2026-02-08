@@ -20,18 +20,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  *  @class ZHHContainerNavigationController
- *  @brief 这个控制器会将所有的导航操作转发给其包含的导航控制器，即 @b ZHHRootNavigationController。
+ *  @brief 库内使用的导航控制器，将导航操作转发到其所属的 @b ZHHRootNavigationController。
  *
- *  如果你在项目中使用了 `UITabBarController`，建议将其包裹在 @b ZHHRootNavigationController 中，方式如下：
+ *  业务侧请使用「TabBar 为 window 根 + 每个 tab 一个 @b ZHHRootNavigationController」的标准多栈方式，例如：
  *  @code
- *  tabController.viewControllers = @[[[ZHHContainerNavigationController alloc] initWithRootViewController:vc1],
- *                                    [[ZHHContainerNavigationController alloc] initWithRootViewController:vc2],
- *                                    [[ZHHContainerNavigationController alloc] initWithRootViewController:vc3],
- *                                    [[ZHHContainerNavigationController alloc] initWithRootViewController:vc4]];
- *  self.window.rootViewController = [[ZHHRootNavigationController alloc] initWithRootViewControllerNoWrapping:tabController];
+ *  tabController.viewControllers = @[[[ZHHRootNavigationController alloc] initWithRootViewController:vc1],
+ *                                    [[ZHHRootNavigationController alloc] initWithRootViewController:vc2],
+ *                                    [[ZHHRootNavigationController alloc] initWithRootViewController:vc3],
+ *                                    [[ZHHRootNavigationController alloc] initWithRootViewController:vc4]];
+ *  self.window.rootViewController = tabController;
  *  @endcode
  *
- *  @note `ZHHContainerNavigationController` 用于在复杂的导航结构中确保所有的导航行为都被正确转发到根导航控制器中。
+ *  @note 符合 Apple 多栈：window 根为 TabBarController，每个 tab 独立一个 ZHHRootNavigationController。
+ *  @note `ZHHContainerNavigationController` 仅由库内 @b ZHHContainerController 使用，业务无需直接使用。
  */
 @interface ZHHContainerNavigationController : UINavigationController
 
